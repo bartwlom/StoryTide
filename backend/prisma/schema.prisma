@@ -9,15 +9,14 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
-
 // Example models
 
-model User {
-  id       Int     @id @default(autoincrement())
-  email    String  @unique
-  name     String?
-  username String  @unique
-  blogs    blog[]
+model User {  
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+  passwords String
+  post blog[]
 }
 
 model blog {
