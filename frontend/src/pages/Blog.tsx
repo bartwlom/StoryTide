@@ -1,7 +1,7 @@
 import { Appbar } from "../components/Appbar";
 import { FullBlog } from "../components/FullBlog";
 import { Spinner } from "../components/Spinner";
-import { useBlog } from "../hooks";
+import { useBlog } from "../Hooks"
 import {useParams} from "react-router-dom";
 
 // atomFamilies/selectorFamilies
@@ -24,6 +24,6 @@ export const Blog = () => {
         </div>
     }
     return <div>
-        <FullBlog blog={blog} />
+        <FullBlog />
     </div>
 }
