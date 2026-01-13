@@ -24,6 +24,6 @@ export const Blog = () => {
         </div>
     }
     return <div>
-        <FullBlog type={blog: blog}/>
+        <FullBlog blog={blog} />
     </div>
 }

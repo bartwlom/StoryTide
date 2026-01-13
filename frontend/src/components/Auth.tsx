@@ -1,6 +1,7 @@
-import { ChangeEvent, useState } from "react";
+import { useState} from "react";
+import type  { ChangeEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { SignupInput } from "@100xdevs/medium-common";
+import { SignupInput } from "@medium-blogging/common-app";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
 
@@ -18,7 +19,7 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
             const jwt = response.data;
             localStorage.setItem("token", jwt);
             navigate("/blogs");
-        } catch(e) {
+        } catch {
             alert("Error while signing up")
             // alert the user here that the request failed
         }
