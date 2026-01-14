@@ -1,7 +1,7 @@
-import zod from "zod";
+import  zod from "zod";
 
 const signupInput = zod.object({
-    email:zod.string().email(),
+    email:zod.string(),
     password:zod.string().min(6),
     name: zod.string().optional()
 });
@@ -28,4 +28,4 @@ export type createPostType = zod.infer<typeof createPostInput>;
 export type signinInputType = zod.infer<typeof  signinInput>;
 export type signupInputType = zod.infer<typeof signupInput>;
 
-export { signupInput, signinInput, createPostInput, updatePostInput };
+export { signupInput, signinInput, createPostInput, updatePostInput };  

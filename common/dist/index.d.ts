@@ -23,4 +23,3 @@ export type createPostType = zod.infer<typeof createPostInput>;
 export type signinInputType = zod.infer<typeof signinInput>;
 export type signupInputType = zod.infer<typeof signupInput>;
 export { signupInput, signinInput, createPostInput, updatePostInput };
-//# sourceMappingURL=index.d.ts.map

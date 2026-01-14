@@ -1,4 +1,5 @@
 import { PrismaClient as BasePrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client/extension";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { Hono } from "hono";
 import { sign } from "hono/jwt";

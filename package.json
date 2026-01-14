@@ -1,12 +1,11 @@
 {
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend",
+    "common"
+  ],
   "dependencies": {
-    "@prisma/client": "^7.2.0",
-    "@prisma/extension-accelerate": "^3.0.1",
     "axios": "^1.13.2"
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.4.23",
-    "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.18"
   }
 }
