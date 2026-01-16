@@ -26,6 +26,9 @@ export const useBlog = ({ id }: { id: string }) => {
                 setBlog(response.data.blog);
                 setLoading(false);
             })
+            .catch(() => {
+                setLoading(false);
+            })
     }, [id])
 
     return {
@@ -45,7 +48,10 @@ export const useBlogs = () => {
             }
         })
             .then((response: { data: { blogs: SetStateAction<Blog[]>; }; }) => {
-                setBlogs(response.data.blogs);
+                setBlogs(response.data.blogs || []);
+                setLoading(false);
+            })
+            .catch(() => {
                 setLoading(false);
             })
     }, [])
