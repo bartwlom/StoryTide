@@ -1,0 +1,52 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment variables (sensitive)
+.env
+.env.local
+.env.*.local
+**/.env
+**/.dev.vars
+
+# Build outputs
+dist/
+build/
+**/dist/
+**/build/
+*.tsbuildinfo
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Wrangler
+.wrangler/
+
+# Prisma generated (optional - you might want to commit this)
+# backend/generated/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/

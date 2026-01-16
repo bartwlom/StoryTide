@@ -19,14 +19,15 @@ export const useBlog = ({ id }: { id: string }) => {
     useEffect(() => {
         axios.get(`${BACKEND_URL}/api/v1/blog/${id}`, {
             headers: {
-                Authorization: localStorage.getItem("token")
+                Authorization: localStorage.getItem("token") || ""
             }
         })
             .then(response => {
                 setBlog(response.data.blog);
                 setLoading(false);
             })
-            .catch(() => {
+            .catch((error) => {
+                console.error("Error fetching blog:", error);
                 setLoading(false);
             })
     }, [id])
@@ -44,14 +45,15 @@ export const useBlogs = () => {
     useEffect(() => {
         axios.get(`${BACKEND_URL}/api/v1/blog/bulk`, {
             headers: {
-                Authorization: localStorage.getItem("token")
+                Authorization: localStorage.getItem("token") || ""
             }
         })
             .then((response: { data: { blogs: SetStateAction<Blog[]>; }; }) => {
                 setBlogs(response.data.blogs || []);
                 setLoading(false);
             })
-            .catch(() => {
+            .catch((error) => {
+                console.error("Error fetching blogs:", error);
                 setLoading(false);
             })
     }, [])
