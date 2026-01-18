@@ -13,7 +13,18 @@
 import * as process from 'node:process'
 import * as path from 'node:path'
 import { fileURLToPath } from 'node:url'
-globalThis['__dirname'] = path.dirname(fileURLToPath(import.meta.url))
+// Patched for Cloudflare Workers compatibility
+const getDirname = (url: string | undefined): string => {
+  if (url) {
+    try {
+      return path.dirname(fileURLToPath(url));
+    } catch {
+      return "/";
+    }
+  }
+  return "/";
+};
+globalThis["__dirname"] = getDirname(typeof import.meta !== "undefined" ? import.meta.url : undefined);
 
 import * as runtime from "@prisma/client/runtime/client"
 import * as $Enums from "./enums"

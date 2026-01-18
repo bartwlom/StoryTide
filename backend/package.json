@@ -4,13 +4,16 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy --minify",
-    "cf-typegen": "wrangler types --env-interface CloudflareBindings"
+    "deploy:skip-validation": "wrangler deploy --minify --dry-run --outdir=dist && echo 'Note: Full deployment blocked by Prisma/uuid compatibility issue. See DEPLOYMENT_ISSUE.md'",
+    "cf-typegen": "wrangler types --env-interface CloudflareBindings",
+    "postinstall": "node patch-uuid.js"
   },
   "dependencies": {
     "@prisma/client": "^7.2.0",
     "hono": "^4.11.4"
   },
   "devDependencies": {
+    "glob": "^13.0.0",
     "prisma": "^7.2.0",
     "wrangler": "^4.4.0"
   }

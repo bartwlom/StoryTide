@@ -11,12 +11,13 @@ export const userRouter = new Hono<{
 
 
 userRouter.post('/signup', async (c) => {
-    // Set DATABASE_URL for Prisma Client
-    if (typeof process !== 'undefined' && process.env) {
-        process.env.DATABASE_URL = c.env.DATABASE_URL;
-    }
-    // @ts-ignore - Prisma Client will use DATABASE_URL from process.env
-    const prisma = new PrismaClient();
+    // Use Prisma Accelerate for Cloudflare Workers
+    const accelerateUrl = c.env.DATABASE_URL.startsWith('prisma+') 
+        ? c.env.DATABASE_URL 
+        : c.env.DATABASE_URL;
+    const prisma = new PrismaClient({
+        accelerateUrl: accelerateUrl
+    });
   
     const body = await c.req.json();
   
@@ -35,12 +36,13 @@ userRouter.post('/signup', async (c) => {
 })
   
 userRouter.post('/signin', async (c) => {
-    // Set DATABASE_URL for Prisma Client
-    if (typeof process !== 'undefined' && process.env) {
-        process.env.DATABASE_URL = c.env.DATABASE_URL;
-    }
-    // @ts-ignore - Prisma Client will use DATABASE_URL from process.env
-    const prisma = new PrismaClient();
+    // Use Prisma Accelerate for Cloudflare Workers
+    const accelerateUrl = c.env.DATABASE_URL.startsWith('prisma+') 
+        ? c.env.DATABASE_URL 
+        : c.env.DATABASE_URL;
+    const prisma = new PrismaClient({
+        accelerateUrl: accelerateUrl
+    });
 
     const body = await c.req.json();
     const user = await prisma.user.findUnique({
