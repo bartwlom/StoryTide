@@ -1,6 +1,8 @@
 # Full Stack Blogging Platform
 
+
 A modern, full-stack blogging platform built with React, TypeScript, and Cloudflare Workers, featuring a REST API backend and a responsive frontend.
+Generally build to discover,read and write ideas that avail...
 
 ## 🚀 Quick Start
 
