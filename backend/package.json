@@ -6,7 +6,8 @@
     "deploy": "wrangler deploy --minify",
     "deploy:skip-validation": "wrangler deploy --minify --dry-run --outdir=dist && echo 'Note: Full deployment blocked by Prisma/uuid compatibility issue. See DEPLOYMENT_ISSUE.md'",
     "cf-typegen": "wrangler types --env-interface CloudflareBindings",
-    "postinstall": "node patch-uuid.js"
+    "postinstall": "node patch-uuid.js",
+    "build": "echo 'No build step for backend (Cloudflare Workers)'"
   },
   "dependencies": {
     "@prisma/client": "^7.2.0",
