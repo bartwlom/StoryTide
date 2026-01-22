@@ -1,4 +1,4 @@
-// Patch script to fix uuid package for Cloudflare Workers
+// Patch script to fix uuid package and Prisma Runtime for Cloudflare Workers
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
@@ -17,14 +17,6 @@ function patchPrismaClient() {
 
   let content = fs.readFileSync(prismaClientPath, 'utf8');
 
-  // Check if already patched
-  if (content.includes('// Patched for Cloudflare Workers compatibility')) {
-    console.log('✅ Prisma client already patched');
-    return true;
-  }
-
-  // Patch the import.meta.url usage
-  const oldCode = `if (typeof import.meta !== "undefined" && import.meta.url) { globalThis["__dirname"] = path.dirname(fileURLToPath(import.meta.url)); } else { globalThis["__dirname"] = "/"; }`;
   const newCode = `// Patched for Cloudflare Workers compatibility
 const getDirname = (url: string | undefined): string => {
   if (url) {
@@ -38,11 +30,24 @@ const getDirname = (url: string | undefined): string => {
 };
 globalThis["__dirname"] = getDirname(typeof import.meta !== "undefined" ? import.meta.url : undefined);`;
 
-  if (content.includes('globalThis[\'__dirname\'] = path.dirname(fileURLToPath(import.meta.url))')) {
-    content = content.replace(
-      'globalThis[\'__dirname\'] = path.dirname(fileURLToPath(import.meta.url))',
-      newCode
-    );
+  const oldCode = `if (typeof import.meta !== "undefined" && import.meta.url) { globalThis["__dirname"] = path.dirname(fileURLToPath(import.meta.url)); } else { globalThis["__dirname"] = "/"; }`;
+  const v2Target = `globalThis['__dirname'] = path.dirname(fileURLToPath(import.meta.url))`;
+
+  let patched = false;
+
+  // Apply patches if needed
+  if (content.includes(oldCode)) {
+    content = content.replace(oldCode, newCode);
+    patched = true;
+  } else if (content.includes(v2Target)) {
+    content = content.replace(v2Target, newCode);
+    patched = true;
+  } else if (content.includes('globalThis["__dirname"] = path.dirname(fileURLToPath(import.meta.url))')) {
+    content = content.replace('globalThis["__dirname"] = path.dirname(fileURLToPath(import.meta.url))', newCode);
+    patched = true;
+  }
+
+  if (patched) {
     fs.writeFileSync(prismaClientPath, content, 'utf8');
     console.log('✅ Patched Prisma client for Cloudflare Workers:', prismaClientPath);
     return true;
@@ -54,85 +59,74 @@ globalThis["__dirname"] = getDirname(typeof import.meta !== "undefined" ? import
 function findAndPatchUuidFiles() {
   const rootDir = join(__dirname, '..');
   const backendDir = __dirname;
-
-  // Try to find uuid files using find command
-  const searchPaths = [
-    join(rootDir, 'node_modules'),
-    join(backendDir, 'node_modules')
-  ];
+  const searchPaths = [join(rootDir, 'node_modules'), join(backendDir, 'node_modules')];
 
   let patchedCount = 0;
-
   for (const basePath of searchPaths) {
     if (!fs.existsSync(basePath)) continue;
-
-    try {
-      // Use find command to locate files
-      const result = execSync(
-        `find "${basePath}" -path "*/uuid/dist/esm/native.js" -type f 2>/dev/null`,
-        { encoding: 'utf8', maxBuffer: 10 * 1024 * 1024 }
-      ).trim();
-
-      if (result) {
-        const files = result.split('\n').filter(f => f);
-
-        for (const filePath of files) {
-          try {
-            let content = fs.readFileSync(filePath, 'utf8');
-
-            if (content.includes('import.meta.url') && !content.includes('typeof import.meta')) {
-              const originalContent = content;
-              content = content.replace(
-                /import\.meta\.url/g,
-                '(typeof import.meta !== "undefined" && import.meta.url ? import.meta.url : "file:///")'
-              );
-
-              if (content !== originalContent) {
-                fs.writeFileSync(filePath, content, 'utf8');
-                console.log(`✅ Patched: ${filePath}`);
-                patchedCount++;
-              }
-            }
-          } catch (error) {
-            // Skip if can't read/write
-          }
-        }
-      }
-    } catch (error) {
-      // find command failed, try manual search
+    const uuidPath = join(basePath, 'uuid', 'dist', 'esm', 'native.js');
+    if (fs.existsSync(uuidPath)) {
       try {
-        const uuidPath = join(basePath, 'uuid', 'dist', 'esm', 'native.js');
-        if (fs.existsSync(uuidPath)) {
-          let content = fs.readFileSync(uuidPath, 'utf8');
-          if (content.includes('import.meta.url') && !content.includes('typeof import.meta')) {
-            content = content.replace(
-              /import\.meta\.url/g,
-              '(typeof import.meta !== "undefined" && import.meta.url ? import.meta.url : "file:///")'
-            );
-            fs.writeFileSync(uuidPath, content, 'utf8');
-            console.log(`✅ Patched: ${uuidPath}`);
-            patchedCount++;
-          }
+        let content = fs.readFileSync(uuidPath, 'utf8');
+        if (content.includes('import.meta.url') && !content.includes('typeof import.meta')) {
+          content = content.replace(/import\.meta\.url/g, '(typeof import.meta !== "undefined" && import.meta.url ? import.meta.url : "file:///")');
+          fs.writeFileSync(uuidPath, content, 'utf8');
+          console.log(`✅ Patched UUID: ${uuidPath}`);
+          patchedCount++;
         }
-      } catch (e) {
-        // Skip
-      }
+      } catch (e) { }
     }
   }
+}
 
-  if (patchedCount === 0) {
-    console.log('⚠️  No uuid files found to patch. The error might be from bundled code.');
-    console.log('💡 Try: npm install --force or delete node_modules and reinstall');
-  } else {
-    console.log(`✅ Successfully patched ${patchedCount} file(s)`);
+function patchPrismaRuntime() {
+  const rootDir = join(__dirname, '..');
+  const searchPaths = [
+    join(rootDir, 'node_modules', '@prisma', 'client', 'runtime', 'client.mjs'),
+    join(rootDir, 'node_modules', '@prisma', 'client', 'runtime', 'client.js'),
+    join(__dirname, 'node_modules', '@prisma', 'client', 'runtime', 'client.mjs'),
+    join(__dirname, 'node_modules', '@prisma', 'client', 'runtime', 'client.js')
+  ];
+
+  for (const filePath of searchPaths) {
+    if (!fs.existsSync(filePath)) continue;
+
+    try {
+      let content = fs.readFileSync(filePath, 'utf8');
+      const originalContent = content;
+
+      // Patch .fileURLToPath(import.meta.url)
+      if (content.includes('fileURLToPath(import.meta.url)') && !content.includes('fileURLToPath(typeof import.meta')) {
+        content = content.replace(
+          /fileURLToPath\(import\.meta\.url\)/g,
+          'fileURLToPath(typeof import.meta !== "undefined" && import.meta.url ? import.meta.url : "file:///unknown")'
+        );
+      }
+
+      // Patch .createRequire(import.meta.url)
+      if (content.includes('createRequire(import.meta.url)') && !content.includes('createRequire(typeof import.meta')) {
+        content = content.replace(
+          /createRequire\(import\.meta\.url\)/g,
+          'createRequire(typeof import.meta !== "undefined" && import.meta.url ? import.meta.url : "file:///unknown")'
+        );
+      }
+
+      if (content !== originalContent) {
+        fs.writeFileSync(filePath, content, 'utf8');
+        console.log(`✅ Patched Prisma runtime: ${filePath}`);
+      } else {
+        // Double check validation - if file contains unpatched string but we didn't patch, logic is wrong
+        if (content.includes('createRequire(import.meta.url)')) {
+          console.log(`⚠️  Warning: createRequire(import.meta.url) found but not patched in ${filePath}`);
+        }
+      }
+    } catch (e) {
+      console.log(`⚠️ Failed to patch ${filePath}:`, e.message);
+    }
   }
 }
 
-// Run both patches
-const prismaPatched = patchPrismaClient();
+// Run patches
+patchPrismaClient();
 findAndPatchUuidFiles();
-
-if (!prismaPatched) {
-  console.log('⚠️  Prisma client patch completed');
-}
-
+patchPrismaRuntime();
