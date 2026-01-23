@@ -3,93 +3,93 @@ import { PrismaClient } from "../../generated/prisma/client";
 import { sign } from 'hono/jwt';
 
 export const blogRouter = new Hono<{
-	Bindings: {
-		DATABASE_URL: string;
-		JWT_SECRET: string;
-	};
-	Variables: {
-		userId: string;
-	};
+    Bindings: {
+        DATABASE_URL: string;
+        JWT_SECRET: string;
+    };
+    Variables: {
+        userId: string;
+    };
 }>();
 
 blogRouter.post('/api/v1/blog', async (c) => {
-	const userId = c.get('userId');
-    // Use Prisma Accelerate for Cloudflare Workers
-    const accelerateUrl = c.env.DATABASE_URL.startsWith('prisma+') 
-        ? c.env.DATABASE_URL 
-        : c.env.DATABASE_URL;
-	const prisma = new PrismaClient({
-		accelerateUrl: accelerateUrl
-	});
-	const body = await c.req.json();
-	const post = await prisma.blog.create({
-		data: {
-			title: body.title,
-			content: body.content,
-			authorId: parseInt(userId)
-		}
-	});
-	return c.json({
-		id: post.id
-	});
+    const userId = c.get('userId');
+    const prisma = new PrismaClient({
+        datasources: {
+            db: {
+                url: c.env.DATABASE_URL
+            }
+        }
+    });
+    const body = await c.req.json();
+    const post = await prisma.blog.create({
+        data: {
+            title: body.title,
+            content: body.content,
+            authorId: parseInt(userId)
+        }
+    });
+    return c.json({
+        id: post.id
+    });
 });
 
 blogRouter.put('/api/v1/blog', async (c) => {
-	const userId = c.get('userId');
-    // Use Prisma Accelerate for Cloudflare Workers
-    const accelerateUrl = c.env.DATABASE_URL.startsWith('prisma+') 
-        ? c.env.DATABASE_URL 
-        : c.env.DATABASE_URL;
-	const prisma = new PrismaClient({
-		accelerateUrl: accelerateUrl
-	});
+    const userId = c.get('userId');
+    const prisma = new PrismaClient({
+        datasources: {
+            db: {
+                url: c.env.DATABASE_URL
+            }
+        }
+    });
 
-	const body = await c.req.json();
-	await prisma.blog.update({
-		where: {
-			id: body.id,
-			authorId: parseInt(userId)
-		},
-		data: {
-			title: body.title,
-			content: body.content
-		}
-	});
+    const body = await c.req.json();
+    await prisma.blog.update({
+        where: {
+            id: body.id,
+            authorId: parseInt(userId)
+        },
+        data: {
+            title: body.title,
+            content: body.content
+        }
+    });
 
-	return c.text('updated post');
+    return c.text('updated post');
 });
 
 blogRouter.get('/api/v1/blog/:id', async (c) => {
-	const id = parseInt(c.req.param('id'));
-    // Use Prisma Accelerate for Cloudflare Workers
-    const accelerateUrl = c.env.DATABASE_URL.startsWith('prisma+') 
-        ? c.env.DATABASE_URL 
-        : c.env.DATABASE_URL;
-	const prisma = new PrismaClient({
-		accelerateUrl: accelerateUrl
-	});
-	
-	const post = await prisma.blog.findUnique({
-		where: {
-			id
-		}
-	});
+    const id = parseInt(c.req.param('id'));
+    const prisma = new PrismaClient({
+        datasources: {
+            db: {
+                url: c.env.DATABASE_URL
+            }
+        }
+    });
 
-	return c.json(post);
+    const post = await prisma.blog.findUnique({
+        where: {
+            id
+        }
+    });
+
+    return c.json(post);
 });
 
 blogRouter.get('/api/v1/blog/bulk', async (c) => {
-    // Use Prisma Accelerate for Cloudflare Workers
-    const accelerateUrl = c.env.DATABASE_URL.startsWith('prisma+') 
-        ? c.env.DATABASE_URL 
-        : c.env.DATABASE_URL;
-	const prisma = new PrismaClient({
-		accelerateUrl: accelerateUrl
-	});
-	
-	const posts = await prisma.blog.findMany({});
+    const prisma = new PrismaClient({
+        datasources: {
+            db: {
+                url: c.env.DATABASE_URL
+            }
+        }
+    });
 
-	return c.json(posts);
+    const posts = await prisma.blog.findMany({});
+
+    return c.json(posts);
 });
 
 export const userRouter = new Hono<{
@@ -101,33 +101,33 @@ export const userRouter = new Hono<{
 
 userRouter.post('/signup', async (c) => {
     // Use Prisma Accelerate for Cloudflare Workers
-    const accelerateUrl = c.env.DATABASE_URL.startsWith('prisma+') 
-        ? c.env.DATABASE_URL 
+    const accelerateUrl = c.env.DATABASE_URL.startsWith('prisma+')
+        ? c.env.DATABASE_URL
         : c.env.DATABASE_URL;
     const prisma = new PrismaClient({
-      accelerateUrl: accelerateUrl,
+        accelerateUrl: accelerateUrl,
     });
-  
+
     const body = await c.req.json();
-  
+
     const user = await prisma.user.create({
-      data: {
-        email: body.email,
-        passwords: body.password,
-      },
+        data: {
+            email: body.email,
+            passwords: body.password,
+        },
     });
-  
+
     const token = await sign({ id: user.id }, c.env.JWT_SECRET)
-  
+
     return c.json({
-      jwt: token
+        jwt: token
     })
 })
-  
+
 userRouter.post('/signin', async (c) => {
     // Use Prisma Accelerate for Cloudflare Workers
-    const accelerateUrl = c.env.DATABASE_URL.startsWith('prisma+') 
-        ? c.env.DATABASE_URL 
+    const accelerateUrl = c.env.DATABASE_URL.startsWith('prisma+')
+        ? c.env.DATABASE_URL
         : c.env.DATABASE_URL;
     const prisma = new PrismaClient({
         accelerateUrl: accelerateUrl

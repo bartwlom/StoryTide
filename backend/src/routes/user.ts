@@ -11,37 +11,29 @@ export const userRouter = new Hono<{
 
 
 userRouter.post('/signup', async (c) => {
-    // Use Prisma Accelerate for Cloudflare Workers
-    const accelerateUrl = c.env.DATABASE_URL.startsWith('prisma+') 
-        ? c.env.DATABASE_URL 
-        : c.env.DATABASE_URL;
     const prisma = new PrismaClient({
-        accelerateUrl: accelerateUrl
+        accelerateUrl: c.env.DATABASE_URL
     });
-  
+
     const body = await c.req.json();
-  
+
     const user = await prisma.user.create({
-      data: {
-        email: body.email,
-        passwords: body.password,
-      },
+        data: {
+            email: body.email,
+            passwords: body.password,
+        },
     });
-  
+
     const token = await sign({ id: user.id }, c.env.JWT_SECRET)
-  
+
     return c.json({
-      jwt: token
+        jwt: token
     })
 })
-  
+
 userRouter.post('/signin', async (c) => {
-    // Use Prisma Accelerate for Cloudflare Workers
-    const accelerateUrl = c.env.DATABASE_URL.startsWith('prisma+') 
-        ? c.env.DATABASE_URL 
-        : c.env.DATABASE_URL;
     const prisma = new PrismaClient({
-        accelerateUrl: accelerateUrl
+        accelerateUrl: c.env.DATABASE_URL
     });
 
     const body = await c.req.json();
