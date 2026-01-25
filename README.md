@@ -1,6 +1,29 @@
 
 A modern, full-stack blogging platform built with React, TypeScript, and Cloudflare Workers, featuring a REST API backend and a responsive frontend.
 
+ Homepage - "Welcome to StoryTide: Discover a world of stories and ideas."
+
+<img width="1909" height="929" alt="4" src="https://github.com/user-attachments/assets/5ac59022-f54c-426d-8d35-90253adaabf5" />
+
+
+
+
+ Login Page - "Join our community: Sign in to start sharing your stories."
+   <img width="1909" height="929" alt="2" src="https://github.com/user-attachments/assets/60510402-977e-4244-88ef-6fa80d0600bf" />
+
+
+
+
+Signup Page - "Become a part of StoryTide: Create your account and start your journey."
+<img width="1909" height="929" alt="3" src="https://github.com/user-attachments/assets/d87d03f2-b93c-4a65-a562-893417b7b089" />
+
+
+
+
+Blog Creation Page - "Share your thoughts: Create and publish your blog posts easily."
+ <img width="1909" height="929" alt="1" src="https://github.com/user-attachments/assets/67319eb3-4525-4af6-be5e-f360ec73f711" />
+
+ 
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -58,27 +81,8 @@ npm run preview          # Preview production build
 npm run lint             # Run ESLint
 ```
 
- Homepage - "Welcome to StoryTide: Discover a world of stories and ideas."
-
-<img width="1909" height="929" alt="4" src="https://github.com/user-attachments/assets/5ac59022-f54c-426d-8d35-90253adaabf5" />
 
 
-
-
- Login Page - "Join our community: Sign in to start sharing your stories."
-   <img width="1909" height="929" alt="2" src="https://github.com/user-attachments/assets/60510402-977e-4244-88ef-6fa80d0600bf" />
-
-
-
-
-Signup Page - "Become a part of StoryTide: Create your account and start your journey."
-<img width="1909" height="929" alt="3" src="https://github.com/user-attachments/assets/d87d03f2-b93c-4a65-a562-893417b7b089" />
-
-
-
-
-Blog Creation Page - "Share your thoughts: Create and publish your blog posts easily."
-   <img width="1909" height="929" alt="4" src="https://github.com/user-attachments/assets/ed02bd20-8013-4b55-a595-bc1cc161cd2a" />
 
 
 
