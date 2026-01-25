@@ -3,21 +3,18 @@
   "type": "module",
   "scripts": {
     "dev": "wrangler dev",
+    "build": "wrangler deploy --dry-run",
     "deploy": "wrangler deploy --minify",
-    "deploy:skip-validation": "wrangler deploy --minify --dry-run --outdir=dist && echo 'Note: Full deployment blocked by Prisma/uuid compatibility issue. See DEPLOYMENT_ISSUE.md'",
-    "cf-typegen": "wrangler types --env-interface CloudflareBindings",
-    "postinstall": "node patch-uuid.js",
-    "build": "echo 'No build step for backend (Cloudflare Workers)'"
+    "cf-typegen": "wrangler types --env-interface CloudflareBindings"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^1.0.2",
-    "@prisma/adapter-neon": "^7.3.0",
-    "@prisma/client": "^7.2.0",
-    "hono": "^4.11.4"
+    "@prisma/client": "^7.3.0",
+    "@prisma/extension-accelerate": "^3.0.1",
+    "@medium-blogging/common-app": "^1.0.0",
+    "hono": "^4.11.5"
   },
   "devDependencies": {
-    "glob": "^13.0.0",
-    "prisma": "^7.2.0",
+    "prisma": "^7.3.0",
     "wrangler": "^4.4.0"
   }
 }

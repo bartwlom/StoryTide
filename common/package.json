@@ -2,6 +2,9 @@
   "name": "@medium-blogging/common-app",
   "version": "1.0.0",
   "type": "module",
+  "scripts": {
+    "build": "tsc"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts"
 }

@@ -1,13 +1,10 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "backend",
+  "name": "medium-blogging",
   "main": "src/index.ts",
-  "compatibility_date": "2026-01-16",
-  "compatibility_flags": [
-    "nodejs_compat"
-  ],
+  "compatibility_date": "2026-01-25",
   "vars": {
-    "DATABASE_URL": "prisma+postgres://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqd3RfaWQiOjEsInNlY3VyZV9rZXkiOiJza19Mb1BzM01KOG50MnNrYURoXzlFeWEiLCJhcGlfa2V5IjoiMDFLRjYzWlczMVhXQURaWUNNUTQ4N0czRlYiLCJ0ZW5hbnRfaWQiOiI0YTVkYzQyYjQxNzIyYTJmMDY4NGQzMjU4YzhjNDY1NTQ2M2M0ODBkNjIwYmJhYjRmMGU3ZWU2N2Y4Zjc3YWI4IiwiaW50ZXJuYWxfc2VjcmV0IjoiNzU1ZjBmYWEtY2E5Mi00NjBmLWIzYjItZGIxNjRmMjY2NDc0In0.YccgLyTHiT-6UNZGONWShl3HAOkztHMkdUoiYnVM87A",
-    "JWT_SECRET": "my-super-secret-jwt-key-for-blogging-app-2024-min-32-chars-long"
-  }
+    "DATABASE_URL":"prisma+postgres://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqd3RfaWQiOjEsInNlY3VyZV9rZXkiOiJza19oREZ2WEl1eTdWYWI4MU83YVBWYmwiLCJhcGlfa2V5IjoiMDFLRlQxTVpCR0pOUzJHQUc3RjNaQVJLVkEiLCJ0ZW5hbnRfaWQiOiJkY2NkN2RhYzJmYTUxYjE5ZDg1NmVhNTg4MTU3NzVhYTkzN2QxODAyYzQ3Njg5ZTUwMjVmYjRkMmQ1MTAxNjE2IiwiaW50ZXJuYWxfc2VjcmV0IjoiNjNlOWE4N2MtY2VlZS00OGI0LTg2YTUtYjNhNmIzNmQ3MTFjIn0.0N1sWBk7kadqiLha2rtdhcW9pyC48Fyb_mky2XVgEI8",
+    "JWT_SECRET": "edRaSjloqNrOSt7m53yvywlakoyll7oRb/1ngJRdXec="
 }
+} 
