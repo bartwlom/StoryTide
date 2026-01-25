@@ -1,11 +1,3 @@
-<img width="1909" height="929" alt="3" src="https://github.com/user-attachments/assets/6c880069-ade9-44c2-b32a-4d8fdda81bd0" />Okay, the user wants to add a description to make the image label section look cooler. Let's enhance the image labels with more descriptive and engaging text. Here’s how we can do it:
-
-1. **Image 1**: Homepage - "Welcome to StoryTide: Discover a world of stories and ideas."
-2. **Image 2**: Login Page - "Join our community: Sign in to start sharing your stories."
-3. **Image 3**: Signup Page - "Become a part of StoryTide: Create your account and start your journey."
-4. **Image 4**: Blog Creation Page - "Share your thoughts: Create and publish your blog posts easily."
-
-Let's update the README file with these descriptions.# StoryTide
 
 A modern, full-stack blogging platform built with React, TypeScript, and Cloudflare Workers, featuring a REST API backend and a responsive frontend.
 
@@ -67,7 +59,8 @@ npm run lint             # Run ESLint
 ```
 
  Homepage - "Welcome to StoryTide: Discover a world of stories and ideas."
-<img width="1909" height="929" alt="1" src="https://github.com/user-attachments/assets/7351e5b8-4961-46e7-8679-426446d79428" />
+
+<img width="1909" height="929" alt="4" src="https://github.com/user-attachments/assets/5ac59022-f54c-426d-8d35-90253adaabf5" />
 
 
 
@@ -88,3 +81,6 @@ Blog Creation Page - "Share your thoughts: Create and publish your blog posts ea
    <img width="1909" height="929" alt="4" src="https://github.com/user-attachments/assets/ed02bd20-8013-4b55-a595-bc1cc161cd2a" />
 
 
+
+
+ 
