@@ -3,15 +3,16 @@
   "type": "module",
   "scripts": {
     "dev": "wrangler dev",
-    "build": "wrangler deploy --dry-run",
-    "deploy": "wrangler deploy --minify",
+    "build": "prisma generate && wrangler deploy --dry-run",
+    "deploy": "prisma generate && wrangler deploy --minify",
     "cf-typegen": "wrangler types --env-interface CloudflareBindings"
   },
   "dependencies": {
     "@prisma/client": "^7.3.0",
     "@prisma/extension-accelerate": "^3.0.1",
     "@medium-blogging/common-app": "^1.0.0",
-    "hono": "^4.11.5"
+    "hono": "^4.11.5",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "prisma": "^7.3.0",
