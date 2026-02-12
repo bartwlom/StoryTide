@@ -1,5 +1,5 @@
 
-A modern, full-stack blogging platform built with React, TypeScript, and Cloudflare Workers, featuring a REST API backend and a responsive frontend.
+### A modern, full-stack blogging platform built with React, TypeScript, and Cloudflare Workers, featuring a REST API backend and a responsive frontend.
 
  Homepage - "Welcome to StoryTide: Discover a world of stories and ideas."
 
@@ -24,7 +24,7 @@ Blog Creation Page - "Share your thoughts: Create and publish your blog posts ea
  <img width="1909" height="929" alt="1" src="https://github.com/user-attachments/assets/67319eb3-4525-4af6-be5e-f360ec73f711" />
 
  
-## 🚀 Quick Start
+### 🚀 Quick Start
 
 ### Prerequisites
 
