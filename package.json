@@ -5,6 +5,10 @@
     "backend",
     "common"
   ],
+  "scripts": {
+    "build:backend": "npm run build -w backend",
+    "deploy:backend": "npm run deploy -w backend"
+  },
   "dependencies": {
     "@medium-blogging/common-app": "^1.0.0",
     "axios": "^1.13.2"
