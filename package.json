@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "build:backend": "npm run build -w backend",
-    "deploy:backend": "npm run deploy -w backend"
+    "deploy:backend": "npx wrangler deploy backend/src/index.ts --name medium-blogging --compatibility-date 2026-02-12"
   },
   "dependencies": {
     "@medium-blogging/common-app": "^1.0.0",
