@@ -17,7 +17,7 @@ blogRouter.use("/*", async (c, next) => {
     const authHeader = c.req.header("authorization") || "";
     try {
         const token = authHeader.startsWith("Bearer ") ? authHeader.split(' ')[1] : authHeader;
-        const user = await verify(token, c.env.JWT_SECRET);
+        const user = await verify(token, c.env.JWT_SECRET, 'HS256');
         if (user) {
             // @ts-ignore
             c.set("userId", user.id);
