@@ -1,7 +1,0 @@
-name = "medium-blogging"
-main = "backend/src/index.ts"
-compatibility_date = "2026-01-25"
-
-[vars]
-DATABASE_URL = "prisma+postgres://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqd3RfaWQiOjEsInNlY3VyZV9rZXkiOiJza19oREZ2WEl1eTdWYWI4MU83YVBWYmwiLCJhcGlfa2V5IjoiMDFLRlQxTVpCR0pOUzJHQUc3RjNaQVJLVkEiLCJ0ZW5hbnRfaWQiOiJkY2NkN2RhYzJmYTUxYjE5ZDg1NmVhNTg4MTU3NzVhYTkzN2QxODAyYzQ3Njg5ZTUwMjVmYjRkMmQ1MTAxNjE2IiwiaW50ZXJuYWxfc2VjcmV0IjoiNjNlOWE4N2MtY2VlZS00OGI0LTg2YTUtYjNhNmIzNmQ3MTFjIn0.0N1sWBk7kadqiLha2rtdhcW9pyC48Fyb_mky2XVgEI8"
-JWT_SECRET = "edRaSjloqNrOSt7m53yvywlakoyll7oRb/1ngJRdXec="
