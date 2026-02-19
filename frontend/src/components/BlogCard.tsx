@@ -7,6 +7,19 @@ interface BlogCardProps {
     id: number;
 }
 
+function formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+    }) + " • " + date.toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+    });
+}
+
 export const BlogCard = ({
     id,
     authorName,
@@ -23,7 +36,7 @@ export const BlogCard = ({
                     <Circle />
                 </div>
                 <div className="pl-2 font-thin text-slate-500 text-sm flex justify-center flex-col">
-                    {publishedDate}
+                    {formatDate(publishedDate)}
                 </div>
             </div>
             <div className="text-xl font-semibold pt-2">
@@ -47,8 +60,8 @@ export function Circle() {
 
 export function Avatar({ name, size = "small" }: { name: string, size?: "small" | "big" }) {
     return <div className={`relative inline-flex items-center justify-center overflow-hidden bg-gray-600 rounded-full ${size === "small" ? "w-6 h-6" : "w-10 h-10"}`}>
-    <span className={`${size === "small" ? "text-xs" : "text-md"} font-extralight text-gray-600 dark:text-gray-300`}>
-        {name[0]}
-    </span>
-</div>
+        <span className={`${size === "small" ? "text-xs" : "text-md"} font-extralight text-gray-600 dark:text-gray-300`}>
+            {name[0]}
+        </span>
+    </div>
 }

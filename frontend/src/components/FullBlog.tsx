@@ -1,8 +1,23 @@
-import type  { Blog } from "../Hooks"
+import type { Blog } from "../Hooks"
 import { Appbar } from "./Appbar"
 import { Avatar } from "./BlogCard"
 
-export const FullBlog = ({ blog }: {blog: Blog}) => {
+function formatFullDate(dateString: string): string {
+    const date = new Date(dateString);
+    const datePart = date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    });
+    const timePart = date.toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+    });
+    return `Published on ${datePart} at ${timePart}`;
+}
+
+export const FullBlog = ({ blog }: { blog: Blog }) => {
     return <div>
         <Appbar />
         <div className="flex justify-center">
@@ -12,7 +27,7 @@ export const FullBlog = ({ blog }: {blog: Blog}) => {
                         {blog.title}
                     </div>
                     <div className="text-slate-500 pt-2">
-                        Post on 2nd December 2023
+                        {formatFullDate(blog.createdAt)}
                     </div>
                     <div className="pt-4">
                         {blog.content}
@@ -34,9 +49,9 @@ export const FullBlog = ({ blog }: {blog: Blog}) => {
                                 Random catch phrase about the author's ability to grab the user's attention
                             </div>
                         </div>
-                    </div>  
+                    </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
