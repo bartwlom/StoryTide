@@ -6,7 +6,7 @@ import { BACKEND_URL } from "../config";
 export interface Blog {
     "content": string;
     "title": string;
-    "id": number
+    "id": string
     "createdAt": string
     "author": {
         "name": string
