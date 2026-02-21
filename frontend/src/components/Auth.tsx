@@ -17,7 +17,7 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
         try {
             const response = await axios.post(`${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`, postInputs);
             const jwt = response.data.jwt;
-            localStorage.setItem("token", jwt);
+            localStorage.setItem("token", "Bearer " + jwt);
             navigate("/blogs");
         } catch {
             alert("Error while signing up")
@@ -30,7 +30,7 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
             <div>
                 <div className="px-10">
                     <div className="text-3xl font-extrabold">
-                        Create an account
+                        {type === "signup" ? "Create an account" : "Sign in to your account"}
                     </div>
                     <div className="text-slate-500">
                         {type === "signin" ? "Don't have an account?" : "Already have an account?"}

@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { Hono } from 'hono'
 import { verify } from 'hono/jwt'
+import { createPostInput, updatePostInput } from '@medium-blogging/common-app'
 
 export const blogRouter = new Hono<{
     Bindings: {
@@ -38,43 +39,65 @@ blogRouter.use("/*", async (c, next) => {
 
 blogRouter.post('/', async (c) => {
     const body = await c.req.json();
+    const { success } = createPostInput.safeParse(body);
+    if (!success) {
+        c.status(400);
+        return c.json({ message: "Invalid inputs" });
+    }
     const authorId = c.get("userId");
     const prisma = new PrismaClient({
         accelerateUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())
 
-    const blog = await prisma.post.create({
-        data: {
-            title: body.title,
-            content: body.content,
-            authorId: authorId
-        }
-    })
+    try {
+        const blog = await prisma.post.create({
+            data: {
+                title: body.title,
+                content: body.content,
+                authorId: authorId
+            }
+        })
 
-    return c.json({
-        id: blog.id
-    })
+        return c.json({
+            id: blog.id
+        })
+    } catch (e) {
+        console.error(e);
+        c.status(500);
+        return c.json({ message: "Error creating blog post" });
+    }
 })
 
 blogRouter.put('/', async (c) => {
     const body = await c.req.json();
+    const { success } = updatePostInput.safeParse(body);
+    if (!success) {
+        c.status(400);
+        return c.json({ message: "Invalid inputs" });
+    }
     const prisma = new PrismaClient({
         accelerateUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())
 
-    const blog = await prisma.post.update({
-        where: {
-            id: body.id
-        },
-        data: {
-            title: body.title,
-            content: body.content
-        }
-    })
+    try {
+        const blog = await prisma.post.update({
+            where: {
+                id: body.id
+            },
+            data: {
+                title: body.title,
+                content: body.content
+            }
+        })
 
-    return c.json({
-        id: blog.id
-    })
+        return c.json({
+            id: blog.id
+        })
+    } catch (e) {
+        console.error(e);
+        c.status(500);
+        return c.json({ message: "Error updating blog post" });
+    }
 })
 
 // Todo: add pagination
@@ -129,7 +152,7 @@ blogRouter.get('/:id', async (c) => {
             blog
         });
     } catch (e) {
-        c.status(411); // 4
+        c.status(404);
         return c.json({
             message: "Error while fetching blog post"
         });
