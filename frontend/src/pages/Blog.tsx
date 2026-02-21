@@ -5,7 +5,6 @@ import { Spinner } from "../components/Spinner";
 import { useBlog } from "../Hooks"
 import { useParams, useNavigate } from "react-router-dom";
 
-// atomFamilies/selectorFamilies
 export const Blog = () => {
     const navigate = useNavigate();
 
