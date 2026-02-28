@@ -1,6 +1,22 @@
 import type { Blog } from "../Hooks"
 import { Appbar } from "./Appbar"
 
+function formatSysDate(dateString?: string): string {
+    if (!dateString) return "UNKNOWN_DATE";
+    const date = new Date(dateString);
+    const datePart = date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+    }).replace(/ /g, '_');
+    const timePart = date.toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: false,
+    });
+    return `${datePart}_${timePart}`;
+}
+
 export const FullBlog = ({ blog }: { blog: Blog }) => {
     return <div className="min-h-screen py-4">
         <Appbar />
@@ -14,7 +30,7 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
                             {blog.title}
                         </div>
                         <div className="opacity-70 font-mono text-sm">
-                            [SYS_LOG: 2nd_December_2023]
+                            [SYS_LOG: {formatSysDate(blog.createdAt)}]
                         </div>
                     </div>
 

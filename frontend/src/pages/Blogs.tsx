@@ -1,9 +1,19 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Appbar } from "../components/Appbar";
 import { BlogCard } from "../components/BlogCard";
 import { BlogSkeleton } from "../components/BlogSkeleton";
 import { useBlogs } from "../Hooks";
 
 export const Blogs = () => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!localStorage.getItem("token")) {
+            navigate("/signup");
+        }
+    }, [navigate]);
+
     const { loading, blogs } = useBlogs();
 
     if (loading) {
@@ -50,7 +60,7 @@ export const Blogs = () => {
                         authorName={blog.author.name || "Anonymous_User"}
                         title={blog.title}
                         content={blog.content}
-                        publishedDate="2nd December 2023"
+                        publishedDate={blog.createdAt || "2nd December 2023"}
                     />)
                 )}
             </div>
