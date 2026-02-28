@@ -1,0 +1,4 @@
+name = "storytide"
+main = "src/index.ts"
+compatibility_date = "2026-01-25"
+compatibility_flags = ["nodejs_compat"]
