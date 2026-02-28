@@ -1,1 +1,79 @@
 @import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+@theme {
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --color-term-bg: #0a0a0a;
+    --color-term-fg: #22c55e;
+    --color-term-glow: #00ff41;
+
+    --animate-blink: blink 1s step-end infinite;
+
+    @keyframes blink {
+
+        0%,
+        100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0;
+        }
+    }
+}
+
+@layer base {
+    body {
+        @apply bg-term-bg text-term-fg font-mono overflow-x-hidden m-0 p-0 selection:bg-term-fg selection:text-term-bg;
+    }
+}
+
+@layer utilities {
+    .text-glow {
+        text-shadow: 0 0 5px var(--color-term-glow), 0 0 10px var(--color-term-fg);
+    }
+
+    .box-glow {
+        box-shadow: 0 0 5px var(--color-term-fg);
+    }
+
+    .border-glow {
+        @apply border border-term-fg;
+        box-shadow: 0 0 5px var(--color-term-fg);
+    }
+
+    .crt-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: repeating-linear-gradient(0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px);
+        pointer-events: none;
+        z-index: 50;
+    }
+
+    .crt-flicker {
+        animation: flicker 0.15s infinite;
+    }
+
+    @keyframes flicker {
+        0% {
+            opacity: 0.98;
+        }
+
+        50% {
+            opacity: 0.95;
+        }
+
+        100% {
+            opacity: 0.98;
+        }
+    }
+}

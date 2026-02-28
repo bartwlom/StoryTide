@@ -1,14 +1,15 @@
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 import { Signup } from "./pages/Signup"
-import { Signin } from  "./pages/Signin"
+import { Signin } from "./pages/Signin"
 import { Blog } from './pages/Blog'
 import { Blogs } from './pages/Blogs'
 import { Publish } from './pages/Publish'
+import { TerminalLayout } from './components/TerminalLayout'
 
 function App() {
 
   return (
-    <>
+    <TerminalLayout>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Navigate to="/blogs" replace />} />
@@ -19,7 +20,7 @@ function App() {
           <Route path="/publish" element={<Publish />} />
         </Routes>
       </BrowserRouter>
-    </>
+    </TerminalLayout>
   )
 }
 
