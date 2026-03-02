@@ -27,7 +27,7 @@ export const Publish = () => {
                 }
             });
             navigate(`/blog/${response.data.id}`);
-        } catch (e) {
+        } catch {
             alert("SYSTEM ERROR: Failed to write file.");
             setIsPublishing(false);
         }
