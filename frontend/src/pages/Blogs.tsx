@@ -1,18 +1,3 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Appbar } from "../components/Appbar";
-import { BlogCard } from "../components/BlogCard";
-import { BlogSkeleton } from "../components/BlogSkeleton";
-import { useBlogs } from "../Hooks";
-
-export const Blogs = () => {
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (!document.cookie.includes("token")) {
-            navigate("/signup");
-        }
-    }, [navigate]);
 
     const { loading, blogs } = useBlogs();
 
