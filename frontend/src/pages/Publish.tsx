@@ -1,6 +1,5 @@
 import { Appbar } from "../components/Appbar"
-import axios from "axios";
-import { BACKEND_URL } from "../config";
+import { apiClient } from "../config";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import type { ChangeEvent } from "react";
@@ -18,13 +17,9 @@ export const Publish = () => {
         }
         setIsPublishing(true);
         try {
-            const response = await axios.post(`${BACKEND_URL}/api/v1/blog`, {
+            const response = await apiClient.post(`/api/v1/blog`, {
                 title,
                 content: description
-            }, {
-                headers: {
-                    Authorization: localStorage.getItem("token")
-                }
             });
             navigate(`/blog/${response.data.id}`);
         } catch {

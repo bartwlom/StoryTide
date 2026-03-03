@@ -4,6 +4,8 @@ import { Hono } from 'hono'
 import { verify } from 'hono/jwt'
 import { createPostInput, updatePostInput } from '@medium-blogging/common-app'
 
+import { getCookie } from 'hono/cookie'
+
 export const blogRouter = new Hono<{
     Bindings: {
         DATABASE_URL: string;
@@ -15,9 +17,14 @@ export const blogRouter = new Hono<{
 }>();
 
 blogRouter.use("/*", async (c, next) => {
-    const authHeader = c.req.header("authorization") || "";
     try {
-        const token = authHeader.startsWith("Bearer ") ? authHeader.split(' ')[1] : authHeader;
+        const token = getCookie(c, "token");
+        if (!token) {
+            c.status(403);
+            return c.json({
+                message: "You are not logged in"
+            })
+        }
         const user = await verify(token, c.env.JWT_SECRET, 'HS256');
         if (user) {
             // @ts-ignore

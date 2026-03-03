@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { Hono } from "hono";
 import { sign } from "hono/jwt";
+import { setCookie } from "hono/cookie";
 
 export const userRouter = new Hono<{
   Bindings: {
@@ -20,7 +21,7 @@ userRouter.post('/signup', async (c) => {
   const body = await c.req.json();
   const { success } = signupInput.safeParse(body);
   if (!success) {
-    c.status(400);  
+    c.status(400);
     return c.json({
       message: "Inputs not correct"
     })
@@ -39,7 +40,14 @@ userRouter.post('/signup', async (c) => {
       id: user.id
     }, c.env.JWT_SECRET);
 
-    return c.json({ jwt })
+    setCookie(c, "token", jwt, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "Lax",
+      maxAge: 60 * 60 * 24 * 7 // 1 week
+    });
+
+    return c.json({ message: "Signup successful" })
   } catch (e) {
     console.log(e);
     c.status(403);
@@ -77,7 +85,14 @@ userRouter.post('/signin', async (c) => {
       c.env.JWT_SECRET
     )
 
-    return c.json({ jwt })
+    setCookie(c, "token", jwt, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "Lax",
+      maxAge: 60 * 60 * 24 * 7 // 1 week
+    });
+
+    return c.json({ message: "Signin successful" })
   } catch (e) {
     console.log(e);
     c.status(500)
