@@ -44,7 +44,7 @@ userRouter.post('/signup', async (c) => {
       httpOnly: true,
       secure: true,
       sameSite: "Lax",
-      maxAge: 60 * 60 * 24 * 7 // 1 week
+      maxAge: 60 * 60 * 24 * 7 // valid till 1 week only 
     });
 
     return c.json({ message: "Signup successful" })

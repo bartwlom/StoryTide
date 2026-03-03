@@ -9,7 +9,7 @@ export const Blogs = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!localStorage.getItem("token")) {
+        if (!document.cookie.includes("token")) {
             navigate("/signup");
         }
     }, [navigate]);
