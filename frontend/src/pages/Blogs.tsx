@@ -53,3 +53,4 @@
     </div>
 }
 
+export default Blogs;

@@ -14,7 +14,8 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
 
     async function sendRequest() {
         try {
-            await apiClient.post(`/api/v1/user/${type === "signup" ? "signup" : "signin"}`, postInputs);
+            const response = await apiClient.post(`/api/v1/user/${type === "signup" ? "signup" : "signin"}`, postInputs);
+            localStorage.setItem("token", response.data.jwt);
             navigate("/blogs");
         } catch {
             alert("Error while authenticating. SYSTEM HALT.")

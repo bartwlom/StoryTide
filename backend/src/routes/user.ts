@@ -40,14 +40,14 @@ userRouter.post('/signup', async (c) => {
       id: user.id
     }, c.env.JWT_SECRET);
 
-     
-    // Removed Cookies
-      
-      
-      
-    
+    setCookie(c, "token", jwt, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "Lax",
+      maxAge: 60 * 60 * 24 * 7 // valid till 1 week only 
+    });
 
-    return c.json({ jwt, message: "Signup successful" })
+    return c.json({ message: "Signup successful" })
   } catch (e) {
     console.log(e);
     c.status(403);
@@ -85,15 +85,14 @@ userRouter.post('/signin', async (c) => {
       c.env.JWT_SECRET
     )
 
-     
-    // Removed Cookies
-      
-      
-      
-      
-    
+    setCookie(c, "token", jwt, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "Lax",
+      maxAge: 60 * 60 * 24 * 7 // 1 week
+    });
 
-    return c.json({ jwt, message: "Signin successful" })
+    return c.json({ message: "Signin successful" })
   } catch (e) {
     console.log(e);
     c.status(500)
