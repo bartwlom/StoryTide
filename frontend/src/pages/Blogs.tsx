@@ -1,4 +1,9 @@
+import { useBlogs } from "../Hooks";
+import { Appbar } from "../components/Appbar";
+import { BlogSkeleton } from "../components/BlogSkeleton";
+import { BlogCard } from "../components/BlogCard";
 
+export default function Blogs() {
     const { loading, blogs } = useBlogs();
 
     if (loading) {
@@ -20,7 +25,7 @@
         </div>
     }
 
-    return <div className="min-h-screen py-4">
+    return (<div className="min-h-screen py-4">
         <Appbar />
         <div className="flex flex-col items-center px-4">
             <div className="w-full max-w-4xl opacity-70 mb-4 font-mono text-xs md:text-sm flex justify-between border-b border-term-fg/30 pb-2">
@@ -39,7 +44,7 @@
                         <p className="text-sm border-t border-term-fg/30 pt-2 inline-block">No system logs discovered in this partition. Run ./publish_new.sh to write.</p>
                     </div>
                 ) : (
-                    blogs.map(blog => <BlogCard
+                    blogs.map((blog: any) => <BlogCard
                         key={blog.id}
                         id={blog.id}
                         authorName={blog.author.name || "Anonymous_User"}
@@ -51,6 +56,5 @@
             </div>
         </div>
     </div>
+    );
 }
-
-export default Blogs;
