@@ -38,20 +38,20 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
 
             <div className="pt-8 flex flex-col gap-4">
                 {type === "signup" && (
-                    <LabelledInput label="enter_name" placeholder="Harkirat Singh" onChange={(e) => {
+                    <LabelledInput label="enter_name" placeholder="kali charan" onChange={(e) => {
                         setPostInputs({
                             ...postInputs,
                             name: e.target.value
                         })
                     }} />
                 )}
-                <LabelledInput label="enter_email" placeholder="harkirat@gmail.com" onChange={(e) => {
+                <LabelledInput label="enter_email" placeholder="kali@gmail.com" onChange={(e) => {
                     setPostInputs({
                         ...postInputs,
                         email: e.target.value
                     })
                 }} />
-                <LabelledInput label="enter_password" type="password" placeholder="******" onChange={(e) => {
+                <LabelledInput label="enter_password" type="password" placeholder="niggamarda" onChange={(e) => {
                     setPostInputs({
                         ...postInputs,
                         password: e.target.value
@@ -81,15 +81,15 @@ interface LabelledInputType {
 
 function LabelledInput({ label, placeholder, onChange, type }: LabelledInputType) {
     return <div className="flex flex-col sm:flex-row sm:items-center w-full gap-2 text-sm sm:text-base">
-        <label className="text-term-fg opacity-90 whitespace-nowrap min-w-[140px] flex items-center gap-2">
+        <label className="text-term-fg opacity-90 whitespace-nowrap min-w-35 flex items-center gap-2">
             <span className="text-term-glow opacity-50">&gt;</span> {label}:
         </label>
-        <div className="flex-grow flex items-center text-term-fg">
+        <div className="grow flex items-center text-term-fg">
             <span>[</span>
             <input
                 onChange={onChange}
                 type={type || "text"}
-                className="bg-transparent border-none outline-none focus:ring-0 text-term-glow placeholder-term-fg/30 flex-grow px-2 font-mono w-full"
+                className="bg-transparent border-none outline-none focus:ring-0 text-term-glow placeholder-term-fg/30 grow px-2 font-mono w-full"
                 placeholder={placeholder}
                 required
             />
