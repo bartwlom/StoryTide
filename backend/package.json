@@ -8,13 +8,18 @@
     "cf-typegen": "wrangler types --env-interface CloudflareBindings"
   },
   "dependencies": {
+    "@hono/zod-openapi": "^1.2.2",
+    "@medium-blogging/common-app": "^1.0.0",
+    "@neondatabase/serverless": "^1.0.2",
+    "@prisma/adapter-neon": "^7.4.2",
     "@prisma/client": "^7.3.0",
     "@prisma/extension-accelerate": "^3.0.1",
-    "@medium-blogging/common-app": "^1.0.0",
     "hono": "^4.11.5",
+    "ws": "^8.19.0",
     "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@types/ws": "^8.18.1",
     "prisma": "^7.3.0",
     "wrangler": "^4.4.0"
   }
