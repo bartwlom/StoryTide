@@ -25,17 +25,7 @@
 
 @layer base {
     body {
-        background-color: var(--color-term-bg);
-        color: var(--color-term-fg);
-        font-family: var(--font-mono);
-        overflow-x: hidden;
-        margin: 0;
-        padding: 0;
-    }
-
-    ::selection {
-        background: var(--color-term-fg);
-        color: var(--color-term-bg);
+        @apply bg-term-bg text-term-fg font-mono overflow-x-hidden m-0 p-0 selection:bg-term-fg selection:text-term-bg;
     }
 }
 

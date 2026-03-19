@@ -31,9 +31,8 @@ export const Publish = () => {
     return <div className="min-h-screen flex flex-col pt-4 pb-12">
         <Appbar />
 
-        <div className="flex-grow flex flex-col justify-start items-center w-full px-4 max-w-5xl mx-auto">
+        <div className="grow flex flex-col justify-start items-center w-full px-4 max-w-5xl mx-auto">
 
-            {/* Editor Top Bar (Nano Style) */}
             <div className="w-full bg-term-fg text-term-bg font-bold py-1 px-4 flex justify-between uppercase text-xs sm:text-sm">
                 <span>GNU nano 6.2</span>
                 <span>New Buffer</span>
@@ -42,7 +41,6 @@ export const Publish = () => {
 
             <div className="w-full flex flex-col border border-term-fg border-t-0 p-4 bg-term-bg/50 min-h-[60vh]">
 
-                {/* Title Input */}
                 <div className="flex items-center gap-2 mb-6 text-xl border-b border-term-fg/30 pb-2">
                     <span className="opacity-50"># </span>
                     <input
@@ -53,14 +51,12 @@ export const Publish = () => {
                     />
                 </div>
 
-                {/* Content Area */}
                 <TextEditor onChange={(e) => setDescription(e.target.value)} />
 
             </div>
 
         </div>
 
-        {/* Editor Bottom Command Strip */}
         <div className="fixed bottom-0 left-0 w-full bg-term-bg border-t border-term-fg z-50 p-2 text-xs md:text-sm">
             <div className="max-w-5xl mx-auto flex flex-wrap gap-x-6 gap-y-2 justify-between">
                 <div className="flex gap-4 sm:gap-6 flex-wrap">
@@ -95,7 +91,7 @@ export const Publish = () => {
 }
 
 function TextEditor({ onChange }: { onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void }) {
-    return <div className="flex-grow w-full h-full min-h-[40vh]">
+    return <div className="grow w-full h-full min-h-[40vh]">
         <textarea
             onChange={onChange}
             className="w-full h-full min-h-[40vh] bg-transparent border-none outline-none focus:ring-0 text-term-fg resize-none placeholder-term-fg/20 leading-relaxed font-mono custom-scrollbar"

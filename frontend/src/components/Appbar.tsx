@@ -20,7 +20,7 @@ export const Appbar = () => {
                 ./publish_new.sh
             </Link>
 
-            <div className="flex items-center gap-2 hidden sm:flex">
+            <div className="flex items-center gap-2 sm:flex">
                 <Avatar size={"small"} name="root" />
             </div>
         </div>

@@ -4,7 +4,6 @@ import { Terminal } from 'lucide-react';
 export const TerminalLayout = ({ children }: { children: React.ReactNode }) => {
     const [time, setTime] = useState(new Date());
 
-    // Fake memory stat randomizer
     const [memUsage, setMemUsage] = useState("640K");
 
     useEffect(() => {
@@ -23,13 +22,10 @@ export const TerminalLayout = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <div className="min-h-screen bg-term-bg text-term-fg font-mono relative crt-flicker">
-            {/* CRT Scanline Overlay */}
             <div className="crt-overlay pointer-events-none"></div>
 
-            {/* Main Terminal Window */}
             <div className="flex flex-col min-h-screen max-w-5xl mx-auto p-4 md:p-8">
 
-                {/* Mock System Header */}
                 <header className="border-b border-term-fg pb-4 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div className="flex items-center gap-2">
                         <Terminal size={24} className="text-term-fg" />
@@ -48,10 +44,9 @@ export const TerminalLayout = ({ children }: { children: React.ReactNode }) => {
                     </div>
                 </header>
 
-                {/* Content Area */}
-                <main className="flex-grow">
+                <main className="grow">
                     <div className="mb-4 text-sm opacity-70">
-                        ~/storytide/root$ <span className="animate-blink block inline-block w-2 bg-term-fg h-4 align-middle ml-1"></span>
+                        ~/storytide/root$ <span className="animate-blink block w-2 bg-term-fg h-4 align-middle ml-1"></span>
                     </div>
 
                     <div className="w-full">
@@ -59,7 +54,6 @@ export const TerminalLayout = ({ children }: { children: React.ReactNode }) => {
                     </div>
                 </main>
 
-                {/* Footer */}
                 <footer className="mt-12 border-t border-term-fg pt-4 text-xs opacity-50 flex justify-between">
                     <p>(c) 198X STORYTIDE SYSTEMS</p>
                     <p>SYSTEM.OK</p>

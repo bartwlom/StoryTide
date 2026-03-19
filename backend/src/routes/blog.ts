@@ -107,7 +107,6 @@ blogRouter.put('/', async (c) => {
     }
 })
 
-// Todo: add pagination
 blogRouter.get('/bulk', async (c) => {
     const prisma = new PrismaClient({
         accelerateUrl: c.env.DATABASE_URL,
