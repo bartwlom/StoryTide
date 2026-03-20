@@ -1,6 +1,5 @@
-import { useEffect, useState, type SetStateAction } from "react"
-import axios from "axios";
-import { BACKEND_URL } from "../config";
+import { useEffect, useState } from "react"
+import { apiClient } from "../config";
 
 
 export interface Blog {
@@ -18,9 +17,7 @@ export const useBlog = ({ id }: { id: string }) => {
     const [blog, setBlog] = useState<Blog>();
 
     useEffect(() => {
-        axios.get(`${BACKEND_URL}/api/v1/blog/${id}`, {
-            withCredentials: true
-        })
+        apiClient.get(`/api/v1/blog/${id}`)
             .then(response => {
                 setBlog(response.data.blog);
                 setLoading(false);
@@ -42,10 +39,8 @@ export const useBlogs = () => {
     const [blogs, setBlogs] = useState<Blog[]>([]);
 
     useEffect(() => {
-        axios.get(`${BACKEND_URL}/api/v1/blog/bulk`, {
-            withCredentials: true
-        })
-            .then((response: { data: { blogs: SetStateAction<Blog[]>; }; }) => {
+        apiClient.get(`/api/v1/blog/bulk`)
+            .then((response) => {
                 setBlogs(response.data.blogs || []);
                 setLoading(false);
             })

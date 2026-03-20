@@ -43,7 +43,7 @@ export const BlogCard = ({
         </div>
 
         <div className="text-sm md:text-base opacity-70 line-clamp-2 pl-4 border-l border-term-fg/30">
-            {content.slice(0, 150) + "..."}
+            {content.length > 150 ? content.slice(0, 150) + "..." : content}
         </div>
     </Link>
 }
