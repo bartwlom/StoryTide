@@ -10,7 +10,7 @@ export const Quote = () => {
             </div>
 
             <div className="text-lg md:text-xl font-mono leading-relaxed opacity-90 mb-6 pl-4 border-l-2 border-term-fg/50">
-                "The only way to do great work is to love what you do. If you don't find what you love keep looking and settle as with all matters of heart you'll know when you find it."
+                "The only way to do great work is to love what you do. If you haven't found it yet, keep looking. Don't settle. As with all matters of the heart, you'll know when you find it."
                 <br /><br />
                 "stay hungry stay foolish"
             </div>

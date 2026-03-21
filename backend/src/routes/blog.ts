@@ -17,6 +17,10 @@ export const blogRouter = new Hono<{
 }>();
 
 blogRouter.use("/*", async (c, next) => {
+    if (c.req.method === "GET") {
+        await next();
+        return;
+    }
     try {
         const token = getCookie(c, "token");
         if (!token) {

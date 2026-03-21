@@ -27,12 +27,12 @@ declare const createPostInput: zod.ZodObject<{
     content: zod.ZodString;
     published: zod.ZodOptional<zod.ZodBoolean>;
 }, "strip", zod.ZodTypeAny, {
-    title: string;
     content: string;
+    title: string;
     published?: boolean | undefined;
 }, {
-    title: string;
     content: string;
+    title: string;
     published?: boolean | undefined;
 }>;
 declare const updatePostInput: zod.ZodObject<{
@@ -40,12 +40,12 @@ declare const updatePostInput: zod.ZodObject<{
     content: zod.ZodOptional<zod.ZodString>;
     published: zod.ZodOptional<zod.ZodBoolean>;
 }, "strip", zod.ZodTypeAny, {
-    title?: string | undefined;
     content?: string | undefined;
+    title?: string | undefined;
     published?: boolean | undefined;
 }, {
-    title?: string | undefined;
     content?: string | undefined;
+    title?: string | undefined;
     published?: boolean | undefined;
 }>;
 export type updatePostType = zod.infer<typeof updatePostInput>;
