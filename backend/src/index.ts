@@ -11,7 +11,9 @@ const app = new Hono<{
 }>()
 
 app.use('*', cors({
-  origin: 'http://localhost:5173',
+  origin: (origin) => {
+    return (origin && origin.includes('storytide.vercel.app')) ? origin : 'http://localhost:5173';
+  },
   credentials: true,
 }))
 
