@@ -1,5 +1,5 @@
 export const Quote = () => {
-   return <div className="bg-slate-200 h-screen flex justify-center flex-col">
+    return <div className="bg-slate-200 h-screen flex justify-center flex-col">
         <div>
             <div className="text-2xl font-bold mb-4">
                 Quote of the Day
@@ -14,7 +14,7 @@ export const Quote = () => {
             <div className="max-w-md text-sm font-light text-slate-400">
                 - Steve Jobs
             </div>
-   
+
         </div>
     </div>
 }
