@@ -6,11 +6,13 @@
     "common"
   ],
   "scripts": {
-    "build": "npm run build -w backend",
-    "build:backend": "npm run build -w backend",
-    "deploy": "npm run deploy -w backend",
-    "deploy:backend": "npm run deploy -w backend"
+    "build:common": "npm run build -w common",
+    "build:backend": "npm run build:common && npm run build -w backend",
+    "build:frontend": "npm run build:common && npm run build -w frontend",
+    "build": "npm run build:common && npm run build:backend && npm run build:frontend",
+    "deploy:backend": "npm run build:backend && npm run deploy -w backend"
   },
+
   "dependencies": {
     "@medium-blogging/common-app": "^1.0.0",
     "axios": "^1.13.2"
