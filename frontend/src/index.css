@@ -2,10 +2,11 @@
 
 /* Terminal Theme - CSS Custom Properties */
 :root {
-  --terminal-bg: #0a0a0a;
+  --terminal-bg: #111111;
   --terminal-green: #00ff41;
   --terminal-green-dim: #00cc33;
   --terminal-green-dark: #003300;
+  --terminal-green-header: #0b3d0b;
   --terminal-border: #00ff41;
   --terminal-input-bg: #0d1a0d;
   --terminal-card-bg: #0f0f0f;
@@ -24,10 +25,11 @@ html, body {
 
 /* Tailwind v4 Theme Configuration */
 @theme {
-  --color-terminal-bg: #0a0a0a;
+  --color-terminal-bg: #111111;
   --color-terminal-green: #00ff41;
   --color-terminal-green-dim: #00cc33;
   --color-terminal-green-dark: #003300;
+  --color-terminal-green-header: #0b3d0b;
   --color-terminal-border: #0b3d0b;
   --color-terminal-input-bg: #0d1a0d;
   --color-terminal-card-bg: #0f0f0f;
