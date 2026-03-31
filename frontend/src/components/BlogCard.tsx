@@ -13,7 +13,7 @@ function formatDate(dateString: string): string {
         year: "numeric",
         month: "short",
         day: "numeric",
-    }) + " • " + date.toLocaleTimeString("en-US", {
+    }) + " " + date.toLocaleTimeString("en-US", {
         hour: "numeric",
         minute: "2-digit",
         hour12: true,
@@ -28,41 +28,57 @@ export const BlogCard = ({
     publishedDate
 }: BlogCardProps) => {
     return <Link to={`/blog/${id}`}>
-        <div className="p-4 border-b border-slate-200 pb-4 w-screen max-w-3xl cursor-pointer">
-            <div className="flex">
+        <div className="p-4 border-b border-terminal-border/30 pb-4 w-screen max-w-3xl cursor-pointer hover:bg-terminal-card-bg/50 transition-colors font-mono">
+            {/* Terminal log entry header */}
+            <div className="flex items-center text-terminal-green-dim text-xs mb-2">
+                <span className="text-terminal-green">[LOG]</span>
+                <span className="mx-2">|</span>
+                <span>{formatDate(publishedDate)}</span>
+                <span className="mx-2">|</span>
+                <span>ID: {id.slice(0, 8)}...</span>
+            </div>
+            
+            {/* Author line */}
+            <div className="flex items-center mb-2">
                 <Avatar name={authorName} />
-                <div className="font-extralight pl-2 text-sm flex justify-center flex-col">{authorName}</div>
+                <div className="pl-2 text-sm text-terminal-green">{authorName}</div>
                 <div className="flex justify-center flex-col pl-2">
                     <Circle />
                 </div>
-                <div className="pl-2 font-thin text-slate-500 text-sm flex justify-center flex-col">
-                    {formatDate(publishedDate)}
+                <div className="pl-2 text-terminal-green-dim text-xs">
+                    USER@{authorName.toLowerCase().replace(/\s/g, '_')}.local
                 </div>
             </div>
-            <div className="text-xl font-semibold pt-2">
-                {title}
+            
+            {/* Title */}
+            <div className="text-lg font-semibold pt-1 text-terminal-green terminal-glow">
+                &gt; {title}
             </div>
-            <div className="text-md font-thin">
+            
+            {/* Content preview */}
+            <div className="text-sm text-terminal-green-dim mt-2 pl-4 border-l-2 border-terminal-green-dark">
                 {content.slice(0, 100) + "..."}
             </div>
-            <div className="text-slate-500 text-sm font-thin pt-4">
-                {`${Math.ceil(content.length / 100)} minute(s) read`}
+            
+            {/* Footer info */}
+            <div className="text-terminal-green-dark text-xs font-mono pt-3 flex items-center gap-4">
+                <span>[SIZE: {content.length}B]</span>
+                <span>[READ_TIME: {Math.ceil(content.length / 100)}m]</span>
+                <span className="text-terminal-green-dim">[STATUS: PUBLISHED]</span>
             </div>
         </div>
     </Link>
 }
 
 export function Circle() {
-    return <div className="h-1 w-1 rounded-full bg-slate-500">
-
+    return <div className="h-1 w-1 rounded-full bg-terminal-green-dim">
     </div>
 }
 
 export function Avatar({ name, size = "small" }: { name: string, size?: "small" | "big" }) {
-    return <div className={`relative inline-flex items-center justify-center overflow-hidden bg-gray-600 rounded-full ${size === "small" ? "w-6 h-6" : "w-10 h-10"}`}>
-        <span className={`${size === "small" ? "text-xs" : "text-md"} font-extralight text-gray-300 dark:text-gray-300`}>
-
-            {name[0]}
+    return <div className={`relative inline-flex items-center justify-center overflow-hidden bg-terminal-green-dark border border-terminal-green rounded-full ${size === "small" ? "w-6 h-6" : "w-10 h-10"}`}>
+        <span className={`${size === "small" ? "text-xs" : "text-md"} font-mono font-bold text-terminal-green`}>
+            {name[0].toUpperCase()}
         </span>
     </div>
 }

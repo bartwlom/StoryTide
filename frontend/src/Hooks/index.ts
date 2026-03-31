@@ -1,4 +1,4 @@
-import { useEffect, useState, type SetStateAction } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios";
 import { BACKEND_URL } from "../config";
 
@@ -49,7 +49,7 @@ export const useBlogs = () => {
                 Authorization: localStorage.getItem("token") || ""
             }
         })
-            .then((response: { data: { blogs: SetStateAction<Blog[]>; }; }) => {
+            .then((response) => {
                 setBlogs(response.data.blogs || []);
                 setLoading(false);
             })

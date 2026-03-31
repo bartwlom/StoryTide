@@ -1,29 +1,45 @@
 import { Circle } from "./BlogCard"
 
 export const BlogSkeleton = () => {
-    return <div role="status" className="animate-pulse">
-        <div className="p-4 border-b border-slate-200 pb-4 w-screen max-w-3xl cursor-pointer">
-            <div className="flex">
-                <div className="h-4  bg-gray-200 rounded-full w-4 mb-4"></div>
-                <div className="h-2 bg-gray-200 rounded-full mb-2.5"></div>
-                <div className="h-2 bg-gray-200 rounded-full mb-2.5"></div>
-                <div className="flex pl-2  justify-center flex-col">
+    return <div role="status" className="animate-pulse font-mono">
+        <div className="p-4 border-b border-terminal-border/30 pb-4 w-screen max-w-3xl cursor-pointer bg-terminal-card-bg/30">
+            {/* Terminal log entry header skeleton */}
+            <div className="flex items-center text-xs mb-2">
+                <div className="h-3 bg-terminal-green-dark rounded w-10"></div>
+                <span className="mx-2 text-terminal-green-dark">|</span>
+                <div className="h-3 bg-terminal-green-dark rounded w-32"></div>
+                <span className="mx-2 text-terminal-green-dark">|</span>
+                <div className="h-3 bg-terminal-green-dark rounded w-20"></div>
+            </div>
+            
+            {/* Author line skeleton */}
+            <div className="flex items-center mb-2">
+                <div className="h-6 w-6 bg-terminal-green-dark rounded-full"></div>
+                <div className="h-3 bg-terminal-green-dark rounded w-24 ml-2"></div>
+                <div className="flex pl-2 justify-center flex-col">
                     <Circle />
                 </div>
-                <div className="pl-2 font-thin text-slate-500 text-sm flex justify-center flex-col">
-                    <div className="h-2 bg-gray-200 rounded-full mb-2.5"></div>
-                </div>
+                <div className="h-3 bg-terminal-green-dark rounded w-32 ml-2"></div>
             </div>
-            <div className="text-xl font-semibold pt-2">
-                <div className="h-2 bg-gray-200 rounded-full mb-2.5"></div>
+            
+            {/* Title skeleton */}
+            <div className="pt-1">
+                <div className="h-5 bg-terminal-green-dark rounded w-3/4"></div>
             </div>
-            <div className="text-md font-thin">
-                <div className="h-2 bg-gray-200 rounded-full mb-2.5"></div>
+            
+            {/* Content preview skeleton */}
+            <div className="mt-2 pl-4 border-l-2 border-terminal-green-dark">
+                <div className="h-3 bg-terminal-green-dark rounded w-full mb-2"></div>
+                <div className="h-3 bg-terminal-green-dark rounded w-5/6"></div>
             </div>
-            <div className="text-slate-500 text-sm font-thin pt-4">
-                <div className="h-2 bg-gray-200 rounded-full mb-2.5"></div>
+            
+            {/* Footer info skeleton */}
+            <div className="pt-3 flex items-center gap-4">
+                <div className="h-3 bg-terminal-green-dark rounded w-20"></div>
+                <div className="h-3 bg-terminal-green-dark rounded w-24"></div>
+                <div className="h-3 bg-terminal-green-dark rounded w-28"></div>
             </div>
         </div>
-    <span className="sr-only">Loading...</span>
-</div>
+        <span className="sr-only">Loading...</span>
+    </div>
 }

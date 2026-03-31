@@ -1,1 +1,146 @@
 @import "tailwindcss";
+
+/* Terminal Theme - CSS Custom Properties */
+:root {
+  --terminal-bg: #0a0a0a;
+  --terminal-green: #00ff41;
+  --terminal-green-dim: #00cc33;
+  --terminal-green-dark: #003300;
+  --terminal-border: #00ff41;
+  --terminal-input-bg: #0d1a0d;
+  --terminal-card-bg: #0f0f0f;
+  --terminal-header-bg: #050505;
+}
+
+/* Global Body Styles */
+html, body {
+  background-color: var(--terminal-bg);
+  color: var(--terminal-green);
+  font-family: 'Share Tech Mono', 'Fira Code', 'Courier New', monospace;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Tailwind v4 Theme Configuration */
+@theme {
+  --color-terminal-bg: #0a0a0a;
+  --color-terminal-green: #00ff41;
+  --color-terminal-green-dim: #00cc33;
+  --color-terminal-green-dark: #003300;
+  --color-terminal-border: #0b3d0b;
+  --color-terminal-input-bg: #0d1a0d;
+  --color-terminal-card-bg: #0f0f0f;
+  --color-terminal-header-bg: #050505;
+  --font-family-mono: 'Share Tech Mono', 'Fira Code', 'Courier New', monospace;
+}
+
+/* Custom Utility Classes */
+.terminal-glow {
+  text-shadow: 0 0 5px var(--terminal-green), 0 0 10px var(--terminal-green-dim);
+}
+
+.terminal-box {
+  background-color: var(--terminal-card-bg);
+  border: 1px solid var(--terminal-border);
+  border-radius: 0;
+}
+
+.terminal-input {
+  background-color: var(--terminal-input-bg);
+  color: var(--terminal-green);
+  border: none;
+  border-bottom: 1px solid var(--terminal-border);
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.terminal-input:focus {
+  border-bottom-color: var(--terminal-green);
+  box-shadow: 0 1px 0 0 var(--terminal-green);
+}
+
+/* Scanline Effect */
+.scanline {
+  position: relative;
+  overflow: hidden;
+}
+
+.scanline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 65, 0.03) 2px,
+    rgba(0, 255, 65, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Blinking Cursor Animation */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.blink-cursor::after {
+  content: '_';
+  animation: blink 1s infinite;
+  color: var(--terminal-green);
+}
+
+/* Custom Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--terminal-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--terminal-green-dark);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--terminal-green-dim);
+}
+
+/* Firefox Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--terminal-green-dark) var(--terminal-bg);
+}
+
+/* Input and Textarea Defaults */
+input, textarea {
+  background-color: var(--terminal-input-bg);
+  color: var(--terminal-green);
+  caret-color: var(--terminal-green);
+  font-family: inherit;
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--terminal-green-dark);
+}
+
+/* Selection Styling */
+::selection {
+  background-color: var(--terminal-green);
+  color: var(--terminal-bg);
+}
+
+::-moz-selection {
+  background-color: var(--terminal-green);
+  color: var(--terminal-bg);
+}

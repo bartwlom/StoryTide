@@ -19,18 +19,16 @@ export const Blog = () => {
     });
 
     if (loading || !blog) {
-        return <div>
+        return <div className="min-h-screen bg-terminal-bg">
             <Appbar />
-
             <div className="h-screen flex flex-col justify-center">
-
                 <div className="flex justify-center">
                     <Spinner />
                 </div>
             </div>
         </div>
     }
-    return <div>
+    return <div className="min-h-screen bg-terminal-bg">
         <FullBlog blog={blog} />
     </div>
 }

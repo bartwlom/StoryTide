@@ -21,48 +21,68 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
             navigate("/blogs");
         } catch {
             alert("Error while signing up")
-            // alert the user here that the request failed
         }
     }
 
-    return <div className="h-screen flex justify-center flex-col">
-        <div className="flex justify-center">
-            <div>
-                <div className="px-10">
-                    <div className="text-3xl font-extrabold">
-                        Create an account
-                    </div>
-                    <div className="text-slate-500">
-                        {type === "signin" ? "Don't have an account?" : "Already have an account?"}
-                        <Link className="pl-2 underline" to={type === "signin" ? "/signup" : "/signin"}>
-                            {type === "signin" ? "Sign up" : "Sign in"}
+    return (
+        <div className="h-full flex items-center justify-center p-8">
+            <div className="terminal-box w-full max-w-md p-8">
+                <div className="mb-6">
+                    <h1 className="text-2xl font-bold text-terminal-green terminal-glow tracking-wider">
+                        {type === "signup" ? "INITIALIZE_USER" : "AUTHENTICATE_SESSION"}
+                    </h1>
+                    <div className="text-terminal-green-dim text-sm mt-2 font-mono">
+                        <span className="text-terminal-green">&gt;</span> {type === "signup" ? "ACCOUNT_EXISTS?" : "NO_ACCOUNT_DETECTED?"} 
+                        <Link className="ml-2 text-terminal-green hover:terminal-glow transition-all" to={type === "signin" ? "/signup" : "/signin"}>
+                            [ {type === "signin" ? "./run_signup.sh" : "./run_signin.sh"} ]
                         </Link>
                     </div>
                 </div>
-                <div className="pt-8">
-                    {type === "signup" ? <LabelledInput label="Name" placeholder="Amit Bartwal..." onChange={(e) => {
-                        setPostInputs({
-                            ...postInputs,
-                            name: e.target.value
-                        })
-                    }} /> : null}
-                    <LabelledInput label="Email" placeholder="amit@gmail.com" onChange={(e) => {
-                        setPostInputs({
-                            ...postInputs,
-                            email: e.target.value
-                        })
-                    }} />
-                    <LabelledInput label="Password" type={"password"} placeholder="******" onChange={(e) => {
-                        setPostInputs({
-                            ...postInputs,
-                            password: e.target.value
-                        })
-                    }} />
-                    <button onClick={sendRequest} type="button" className="mt-8 w-full text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">{type === "signup" ? "Sign up" : "Sign in"}</button>
+                <div className="space-y-4">
+                    {type === "signup" ? (
+                        <LabelledInput 
+                            label="enter_name" 
+                            placeholder="Harkirat Singh" 
+                            onChange={(e) => {
+                                setPostInputs({
+                                    ...postInputs,
+                                    name: e.target.value
+                                })
+                            }} 
+                        />
+                    ) : null}
+                    <LabelledInput 
+                        label="enter_email" 
+                        placeholder="harkirat@gmail.com" 
+                        onChange={(e) => {
+                            setPostInputs({
+                                ...postInputs,
+                                email: e.target.value
+                            })
+                        }} 
+                    />
+                    <LabelledInput 
+                        label="enter_password" 
+                        type="password" 
+                        placeholder="******" 
+                        onChange={(e) => {
+                            setPostInputs({
+                                ...postInputs,
+                                password: e.target.value
+                            })
+                        }} 
+                    />
+                    <button 
+                        onClick={sendRequest} 
+                        type="button" 
+                        className="mt-6 w-full border border-terminal-green text-terminal-green bg-terminal-input-bg hover:bg-terminal-green hover:text-terminal-bg font-mono text-sm py-3 px-4 transition-all duration-200 terminal-glow"
+                    >
+                        [ {type === "signup" ? "./EXECUTE_SIGNUP.SH" : "./EXECUTE_LOGIN.SH"} ]
+                    </button>
                 </div>
             </div>
         </div>
-    </div>
+    );
 }
 
 interface LabelledInputType {
@@ -73,8 +93,22 @@ interface LabelledInputType {
 }
 
 function LabelledInput({ label, placeholder, onChange, type }: LabelledInputType) {
-    return <div>
-        <label className="block mb-2 text-sm text-black font-semibold pt-4">{label}</label>
-        <input onChange={onChange} type={type || "text"} id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder={placeholder} required />
-    </div>
+    return (
+        <div className="font-mono">
+            <label className="block text-terminal-green text-sm mb-1">
+                <span className="text-terminal-green">&gt;</span> {label}:
+            </label>
+            <div className="flex items-center">
+                <span className="text-terminal-green mr-1">[</span>
+                <input 
+                    onChange={onChange} 
+                    type={type || "text"} 
+                    className="flex-1 bg-transparent text-terminal-green text-sm py-1 outline-none placeholder-terminal-green-dark" 
+                    placeholder={placeholder} 
+                    required 
+                />
+                <span className="text-terminal-green ml-1">]</span>
+            </div>
+        </div>
+    );
 }
