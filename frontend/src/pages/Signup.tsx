@@ -26,7 +26,7 @@ export const Signup = () => {
             <div className="border-b border-terminal-green px-6 py-3">
                 <div className="flex justify-between items-center font-mono text-sm">
                     <div className="text-terminal-green font-bold text-lg">
-                        &gt;_ STORYTIDE<span className="blink-cursor"></span>
+                        &gt;_ STORYTIDE
                     </div>
                     <div className="flex gap-6 text-terminal-green-dim">
                         <span>MEM_UTIL: [608K/640K]</span>
@@ -37,15 +37,15 @@ export const Signup = () => {
 
             {/* Path Prompt */}
             <div className="px-6 py-2 font-mono text-terminal-green text-sm">
-                ~/storytide/root$ <span className="inline-block w-2 h-4 bg-terminal-green animate-pulse"></span>
+                ~/storytide/root$ <span className="blink-cursor"></span>
             </div>
 
             {/* Main Content */}
-            <div className="flex-1 grid grid-cols-1 lg:grid-cols-2">
+            <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 items-center">
                 <div>
                     <Auth type={"signup"} />
                 </div>
-                <div className="hidden lg:block">
+                <div className="hidden lg:block h-full">
                     <Quote />
                 </div>
             </div>

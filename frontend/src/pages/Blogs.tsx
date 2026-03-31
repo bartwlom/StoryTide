@@ -48,9 +48,16 @@ export const Blogs = () => {
                         <div className="text-terminal-green text-xl font-mono mb-4 terminal-glow">
                             DIRECTORY_EMPTY
                         </div>
-                        <div className="text-terminal-green-dim text-sm font-mono">
-                            No system logs discovered in this partition. Run ./publish_new.sh to write.
+                        <div className="text-terminal-green-dim text-sm font-mono mb-6">
+                            No system logs discovered in this partition.
                         </div>
+                        <button 
+                            onClick={() => navigate('/publish')}
+                            className="inline-flex items-center gap-2 px-4 py-2 border border-terminal-green text-terminal-green hover:bg-terminal-green hover:text-terminal-bg font-mono text-sm transition-all duration-200 group"
+                        >
+                            <span className="text-terminal-green group-hover:text-terminal-bg">$</span>
+                            <span>./publish_new.sh</span>
+                        </button>
                     </div>
                 ) : (
                     blogs.map(blog => <BlogCard

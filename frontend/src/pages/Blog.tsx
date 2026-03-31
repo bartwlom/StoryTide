@@ -23,7 +23,7 @@ export const Blog = () => {
             <Appbar />
             <div className="h-screen flex flex-col justify-center">
                 <div className="flex justify-center">
-                    <Spinner />
+                    <Spinner message="LOADING_BLOG_ENTRY" />
                 </div>
             </div>
         </div>

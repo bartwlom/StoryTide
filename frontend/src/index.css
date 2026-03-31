@@ -80,8 +80,8 @@ html, body {
     0deg,
     transparent,
     transparent 2px,
-    rgba(0, 255, 65, 0.03) 2px,
-    rgba(0, 255, 65, 0.03) 4px
+    rgba(0, 255, 65, 0.02) 2px,
+    rgba(0, 255, 65, 0.02) 4px
   );
   pointer-events: none;
   z-index: 1;

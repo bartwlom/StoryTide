@@ -12,22 +12,28 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
         email: "",
         password: ""
     });
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     async function sendRequest() {
+        setLoading(true);
+        setError(null);
         try {
             const response = await axios.post(`${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`, postInputs);
             const jwt = response.data.jwt;
             localStorage.setItem("token", jwt);
             navigate("/blogs");
         } catch {
-            alert("Error while signing up")
+            setError("Authentication failed. Check credentials.");
+        } finally {
+            setLoading(false);
         }
     }
 
     return (
-        <div className="h-full flex items-center justify-center p-8">
-            <div className="terminal-box w-full max-w-md p-8">
-                <div className="mb-6">
+        <div className="h-full flex items-center justify-center p-6">
+            <div className="terminal-box w-full max-w-md p-6">
+                <div className="mb-5">
                     <h1 className="text-2xl font-bold text-terminal-green terminal-glow tracking-wider">
                         {type === "signup" ? "INITIALIZE_USER" : "AUTHENTICATE_SESSION"}
                     </h1>
@@ -75,10 +81,16 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
                     <button 
                         onClick={sendRequest} 
                         type="button" 
-                        className="mt-6 w-full border border-terminal-green text-terminal-green bg-terminal-input-bg hover:bg-terminal-green hover:text-terminal-bg font-mono text-sm py-3 px-4 transition-all duration-200 terminal-glow"
+                        disabled={loading}
+                        className="mt-5 w-full border border-terminal-green text-terminal-green bg-terminal-input-bg hover:bg-terminal-green hover:text-terminal-bg font-mono text-sm py-3 px-4 transition-all duration-200 terminal-glow disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        [ {type === "signup" ? "./EXECUTE_SIGNUP.SH" : "./EXECUTE_LOGIN.SH"} ]
+                        {loading ? "EXECUTING..." : `[ ${type === "signup" ? "./EXECUTE_SIGNUP.SH" : "./EXECUTE_LOGIN.SH"} ]`}
                     </button>
+                    {error && (
+                        <div className="font-mono text-sm text-orange-500 mt-3">
+                            &gt; ERROR: {error}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

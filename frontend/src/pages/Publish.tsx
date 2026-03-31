@@ -36,7 +36,7 @@ export const Publish = () => {
     }, []);
 
     return <div className="min-h-screen bg-terminal-bg flex flex-col">
-        <Appbar />
+        <Appbar mode="WRITE" />
         <div ref={containerRef} className="flex-1 flex flex-col px-4 pb-4">
             <div className="flex-1 w-full font-mono flex flex-col">
                 {/* Nano Editor Container - Full height */}
@@ -74,7 +74,7 @@ export const Publish = () => {
                     {/* Nano Bottom Bar - Muted dark green */}
                     <div className="bg-terminal-green-header text-terminal-green px-2 py-1 flex flex-wrap justify-between items-center text-xs border-t border-terminal-border">
                         <button 
-                            onClick={() => alert("Help: Enter title and content, then press Ctrl+O to publish")}
+                            title="Enter title and content, then press Ctrl+O to publish"
                             className="hover:text-white cursor-pointer transition-colors"
                         >
                             ^G Get Help
