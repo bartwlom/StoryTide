@@ -20,9 +20,8 @@ blogRouter.use("/*", async (c, next) => {
     const authHeader = c.req.header("authorization") || "";
     try {
         const token = authHeader.startsWith("Bearer ") ? authHeader.split(' ')[1] : authHeader;
-        const user = await verify(token, c.env.JWT_SECRET, 'HS256');
+        const user = await verify(token, c.env.JWT_SECRET, 'HS256') as { id: string };
         if (user) {
-            // @ts-ignore
             c.set("userId", user.id);
             await next();
         } else {
@@ -50,7 +49,8 @@ blogRouter.post('/', async (c) => {
     }
     const authorId = c.get("userId");
     const prisma = new PrismaClient({
-        accelerateUrl: c.env.DATABASE_URL,
+        // @ts-ignore
+        datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())
 
     const blog = await prisma.post.create({
@@ -76,7 +76,8 @@ blogRouter.put('/', async (c) => {
         })
     }
     const prisma = new PrismaClient({
-        accelerateUrl: c.env.DATABASE_URL,
+        // @ts-ignore
+        datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())
 
     const blog = await prisma.post.update({
@@ -97,7 +98,8 @@ blogRouter.put('/', async (c) => {
 // Todo: add pagination
 blogRouter.get('/bulk', async (c) => {
     const prisma = new PrismaClient({
-        accelerateUrl: c.env.DATABASE_URL,
+        // @ts-ignore
+        datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())
     const blogs = await prisma.post.findMany({
         select: {
@@ -121,7 +123,8 @@ blogRouter.get('/bulk', async (c) => {
 blogRouter.get('/:id', async (c) => {
     const id = c.req.param("id");
     const prisma = new PrismaClient({
-        accelerateUrl: c.env.DATABASE_URL,
+        // @ts-ignore
+        datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())
 
     try {
@@ -146,7 +149,7 @@ blogRouter.get('/:id', async (c) => {
             blog
         });
     } catch (e) {
-        c.status(411); // 4
+        c.status(500); 
         return c.json({
             message: "Error while fetching blog post"
         });

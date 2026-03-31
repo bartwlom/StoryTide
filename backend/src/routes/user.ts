@@ -13,9 +13,20 @@ export const userRouter = new Hono<{
 
 import { signupInput, signinInput } from "@medium-blogging/common-app";
 
+async function hashPassword(password: string) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(password);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  return hashHex;
+}
+
+
 userRouter.post('/signup', async (c) => {
   const prisma = new PrismaClient({
-    accelerateUrl: c.env.DATABASE_URL
+    // @ts-ignore
+    datasourceUrl: c.env.DATABASE_URL
   }).$extends(withAccelerate());
   const body = await c.req.json();
   const { success } = signupInput.safeParse(body);
@@ -27,10 +38,11 @@ userRouter.post('/signup', async (c) => {
   }
 
   try {
+    const hashedPassword = await hashPassword(body.password);
     const user = await prisma.user.create({
       data: {
         email: body.email,
-        password: body.password,
+        password: hashedPassword,
         name: body.name
       }
     })
@@ -49,7 +61,8 @@ userRouter.post('/signup', async (c) => {
 
 userRouter.post('/signin', async (c) => {
   const prisma = new PrismaClient({
-    accelerateUrl: c.env.DATABASE_URL
+    // @ts-ignore
+    datasourceUrl: c.env.DATABASE_URL
   }).$extends(withAccelerate());
   const body = await c.req.json();
   const { success } = signinInput.safeParse(body);
@@ -67,7 +80,8 @@ userRouter.post('/signin', async (c) => {
       }
     })
 
-    if (!user || user.password !== body.password) {
+    const hashedPassword = await hashPassword(body.password);
+    if (!user || user.password !== hashedPassword) {
       c.status(401)
       return c.json({ error: "Invalid credentials" })
     }
