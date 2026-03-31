@@ -49,8 +49,7 @@ blogRouter.post('/', async (c) => {
     }
     const authorId = c.get("userId");
     const prisma = new PrismaClient({
-        // @ts-ignore
-        datasourceUrl: c.env.DATABASE_URL,
+        accelerateUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())
 
     const blog = await prisma.post.create({
@@ -76,8 +75,7 @@ blogRouter.put('/', async (c) => {
         })
     }
     const prisma = new PrismaClient({
-        // @ts-ignore
-        datasourceUrl: c.env.DATABASE_URL,
+        accelerateUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())
 
     const blog = await prisma.post.update({
@@ -98,8 +96,7 @@ blogRouter.put('/', async (c) => {
 // Todo: add pagination
 blogRouter.get('/bulk', async (c) => {
     const prisma = new PrismaClient({
-        // @ts-ignore
-        datasourceUrl: c.env.DATABASE_URL,
+        accelerateUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())
     const blogs = await prisma.post.findMany({
         select: {
@@ -123,8 +120,7 @@ blogRouter.get('/bulk', async (c) => {
 blogRouter.get('/:id', async (c) => {
     const id = c.req.param("id");
     const prisma = new PrismaClient({
-        // @ts-ignore
-        datasourceUrl: c.env.DATABASE_URL,
+        accelerateUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())
 
     try {

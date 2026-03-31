@@ -25,8 +25,7 @@ async function hashPassword(password: string) {
 
 userRouter.post('/signup', async (c) => {
   const prisma = new PrismaClient({
-    // @ts-ignore
-    datasourceUrl: c.env.DATABASE_URL
+    accelerateUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
   const body = await c.req.json();
   const { success } = signupInput.safeParse(body);
@@ -61,8 +60,7 @@ userRouter.post('/signup', async (c) => {
 
 userRouter.post('/signin', async (c) => {
   const prisma = new PrismaClient({
-    // @ts-ignore
-    datasourceUrl: c.env.DATABASE_URL
+    accelerateUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
   const body = await c.req.json();
   const { success } = signinInput.safeParse(body);
