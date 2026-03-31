@@ -1,6 +1,6 @@
 export const Quote = () => {
     return (
-        <div className="h-full flex items-center justify-center p-8">
+        <div className="p-8">
             <div className="terminal-box w-full max-w-md p-6 relative">
                 <div className="absolute top-0 right-0 bg-terminal-green text-terminal-bg px-2 py-1 text-xs font-mono">
                     /etc/motd

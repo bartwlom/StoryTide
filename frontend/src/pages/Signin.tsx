@@ -41,7 +41,7 @@ export const Signin = () => {
             </div>
 
             {/* Main Content */}
-            <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 items-center">
+            <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 items-start pt-8">
                 <div>
                     <Auth type={"signin"} />
                 </div>

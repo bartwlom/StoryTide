@@ -31,7 +31,7 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
     }
 
     return (
-        <div className="h-full flex items-center justify-center p-6">
+        <div className="p-6">
             <div className="terminal-box w-full max-w-md p-6">
                 <div className="mb-5">
                     <h1 className="text-2xl font-bold text-terminal-green terminal-glow tracking-wider">
