@@ -53,14 +53,36 @@ export const Blogs = () => {
                         </button>
                     </div>
                 ) : (
-                    blogs.map(blog => <BlogCard
-                        key={blog.id}
-                        id={blog.id}
-                        authorName={blog.author.name || "Anonymous"}
-                        title={blog.title}
-                        content={blog.content}
-                        publishedDate={blog.createdAt}
-                    />)
+                    <>
+                        <div className="space-y-6">
+                            {blogs.map(blog => <BlogCard
+                                key={blog.id}
+                                id={blog.id}
+                                authorName={blog.author.name || "Anonymous"}
+                                title={blog.title}
+                                content={blog.content}
+                                publishedDate={blog.createdAt}
+                            />)}
+                        </div>
+                        
+                        {/* Call to Action - Create Your Own Blog */}
+                        <div className="mt-12 mx-4 mb-8">
+                            <div className="terminal-box border-2 border-terminal-green p-8 text-center">
+                                <div className="text-terminal-green text-lg font-mono mb-3 terminal-glow">
+                                    &gt;_ READY_TO_CREATE_LOG?</div>
+                                <div className="text-terminal-green-dim text-sm font-mono mb-6">
+                                    Share your story with the world. Start writing your first blog post now.
+                                </div>
+                                <button 
+                                    onClick={() => navigate('/publish')}
+                                    className="inline-flex items-center gap-2 px-6 py-3 bg-terminal-green text-terminal-bg border border-terminal-green hover:bg-terminal-green-dark font-mono text-base transition-all duration-200 group shadow-lg"
+                                >
+                                    <span className="font-bold">$ ./create_your_blog.sh</span>
+                                    <span className="group-hover:translate-x-1 transition-transform">→</span>
+                                </button>
+                            </div>
+                        </div>
+                    </>
                 )}
             </div>
         </div>

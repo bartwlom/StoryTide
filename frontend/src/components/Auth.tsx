@@ -23,8 +23,11 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
             const jwt = response.data.jwt;
             localStorage.setItem("token", jwt);
             navigate("/blogs");
-        } catch (e: any) {
-            const errorMessage = e?.response?.data?.error || e?.response?.data?.message || "Authentication failed. Check credentials.";
+        } catch (e: unknown) {
+            let errorMessage = "Authentication failed. Check credentials.";
+            if (axios.isAxiosError(e)) {
+                errorMessage = e.response?.data?.error || e.response?.data?.message || errorMessage;
+            }
             setError(errorMessage);
         } finally {
             setLoading(false);
@@ -49,7 +52,7 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
                     {type === "signup" ? (
                         <LabelledInput 
                             label="enter_name" 
-                            placeholder="Harkirat Singh" 
+                            placeholder="Hacker Singh" 
                             onChange={(e) => {
                                 setPostInputs({
                                     ...postInputs,
@@ -60,7 +63,7 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
                     ) : null}
                     <LabelledInput 
                         label="enter_email" 
-                        placeholder="harkirat@gmail.com" 
+                        placeholder="hacker@gmail.com" 
                         onChange={(e) => {
                             setPostInputs({
                                 ...postInputs,

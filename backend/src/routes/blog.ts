@@ -19,7 +19,8 @@ export const blogRouter = new Hono<{
 blogRouter.use("/*", async (c, next) => {
     const authHeader = c.req.header("authorization") || "";
     
-    if (c.req.path === "/bulk" && c.req.method === "GET") {
+    // Allow public access to blog reading endpoints
+    if ((c.req.path.includes("/bulk") || c.req.path.match(/^\/[0-9a-f-]+$/)) && c.req.method === "GET") {
         await next();
         return;
     }
