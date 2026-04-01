@@ -12,14 +12,10 @@ const app = new Hono<{
 
 // Enhanced CORS configuration for production
 app.use('*', cors({
-  origin: (origin) => {
-    // Allow all origins in production (can be restricted if needed)
-    // Add your Vercel deployment URL here when you have it
-    return origin;
-  },
+  origin: ['https://story-tide-frontend-fwnkj1ins-amitbartwal008-6084s-projects.vercel.app', 'https://story-tide-frontend.vercel.app', '*'],
   allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowHeaders: ['Content-Type', 'Authorization'],
-  exposeHeaders: ['Content-Length'],
+  exposeHeaders: ['Content-Length', 'X-Requested-With'],
   maxAge: 86400,
   credentials: true
 }))

@@ -11,6 +11,6 @@
     }
   ],
   "env": {
-    "VITE_BACKEND_URL": "https://storytide.<your-cloudflare-subdomain>.workers.dev"
+    "VITE_BACKEND_URL": "https://storytide.blogging-web.workers.dev"
   }
 }
