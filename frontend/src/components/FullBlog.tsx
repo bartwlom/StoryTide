@@ -84,7 +84,7 @@ export const FullBlog = ({ blog }: {blog: Blog}) => {
                     </div>
                     
                     {/* Content */}
-                    <div className="pt-4 text-terminal-green-dim leading-relaxed whitespace-pre-wrap break-words">
+                    <div className="pt-4 text-terminal-green-dim leading-relaxed whitespace-pre-wrap [overflow-wrap:break-word]">
                         {blog.content}
                     </div>
                     
