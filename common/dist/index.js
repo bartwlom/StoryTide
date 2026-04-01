@@ -1,6 +1,6 @@
 import zod from "zod";
 const signupInput = zod.object({
-    email: zod.string(),
+    email: zod.string().email(),
     password: zod.string().min(6),
     name: zod.string().optional()
 });
@@ -14,6 +14,7 @@ const createPostInput = zod.object({
     published: zod.boolean().optional()
 });
 const updatePostInput = zod.object({
+    id: zod.string(),
     title: zod.string().min(1).max(255).optional(),
     content: zod.string().min(1).optional(),
     published: zod.boolean().optional()

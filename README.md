@@ -136,18 +136,57 @@ After seeding, use these credentials to explore the platform:
 
 ## 🚀 Deployment
 
-### Backend (Cloudflare Workers)
+### Quick Deployment (Recommended)
+
+Use our automated deployment script:
+
 ```bash
-cd backend
-npm run deploy
+./deploy.sh
 ```
 
-### Frontend (Any Static Host)
-```bash
-cd frontend
-npm run build
-# Deploy the dist/ folder to your hosting provider
-```
+This script will guide you through deploying both backend and frontend.
+
+### Manual Deployment
+
+#### Backend (Cloudflare Workers)
+
+1. **Setup Cloudflare Account**:
+   - Sign up at https://dash.cloudflare.com/
+   - Install Wrangler CLI: `npm install -g wrangler`
+   - Login: `npx wrangler login`
+
+2. **Configure Environment Variables**:
+   ```bash
+   cd backend
+   npx wrangler secret put DATABASE_URL
+   npx wrangler secret put JWT_SECRET
+   ```
+
+3. **Deploy**:
+   ```bash
+   npm run deploy
+   ```
+
+4. **Copy your Worker URL** (e.g., `https://storytide.your-subdomain.workers.dev`)
+
+#### Frontend (Vercel)
+
+1. **Update Backend URL**:
+   ```bash
+   cd frontend
+   echo "VITE_BACKEND_URL=https://your-worker-url.workers.dev" > .env.production.local
+   ```
+
+2. **Deploy to Vercel**:
+   - Go to https://vercel.com/dashboard
+   - Click "Add New Project"
+   - Import your repository or drag `frontend/dist` folder
+   - Add environment variable: `VITE_BACKEND_URL` with your Worker URL
+   - Click "Deploy"
+
+📋 **For detailed deployment instructions, see:**
+- [`DEPLOYMENT_CHECKLIST.md`](./DEPLOYMENT_CHECKLIST.md) - Quick step-by-step guide
+- [`DEPLOYMENT.md`](./DEPLOYMENT.md) - Comprehensive deployment documentation
 
 ## 📝 Recent Updates
 

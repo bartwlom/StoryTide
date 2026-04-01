@@ -10,7 +10,10 @@
     "build:backend": "npm run build:common && npm run build -w backend",
     "build:frontend": "npm run build:common && npm run build -w frontend",
     "build": "npm run build:common && npm run build:backend && npm run build:frontend",
-    "deploy:backend": "npm run build:backend && npm run deploy -w backend"
+    "deploy:backend": "npm run build:backend && npm run deploy -w backend",
+    "deploy": "./deploy.sh",
+    "dev:backend": "npm run dev -w backend",
+    "dev:frontend": "npm run dev -w frontend"
   },
 
   "dependencies": {
