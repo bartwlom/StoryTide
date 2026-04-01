@@ -96,8 +96,9 @@ export const Publish = () => {
                                         }
                                     });
                                     navigate(`/blog/${response.data.id}`)
-                                } catch (e: any) {
-                                    if (e?.response?.status === 403) {
+                                } catch (e: unknown) {
+                                    const error = e as { response?: { status?: number } };
+                                    if (error?.response?.status === 403) {
                                         alert("You are not logged in. Redirecting to sign in...");
                                         navigate("/signin");
                                     } else {
