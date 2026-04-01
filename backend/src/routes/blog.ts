@@ -18,6 +18,12 @@ export const blogRouter = new Hono<{
 
 blogRouter.use("/*", async (c, next) => {
     const authHeader = c.req.header("authorization") || "";
+    
+    if (c.req.path === "/bulk" && c.req.method === "GET") {
+        await next();
+        return;
+    }
+    
     try {
         const token = authHeader.startsWith("Bearer ") ? authHeader.split(' ')[1] : authHeader;
         const user = await verify(token, c.env.JWT_SECRET, 'HS256') as { id: string };

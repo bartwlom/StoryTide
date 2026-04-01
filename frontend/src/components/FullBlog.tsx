@@ -4,6 +4,7 @@ import { Avatar } from "./BlogCard"
 import { useNavigate } from "react-router-dom";
 
 function formatDate(dateString: string): string {
+    if (!dateString) return "Unknown date";
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
         year: "numeric",
@@ -44,6 +45,12 @@ function AuthorCard({ blog }: { blog: Blog }) {
 
 export const FullBlog = ({ blog }: {blog: Blog}) => {
     const navigate = useNavigate();
+    
+    if (!blog) {
+        return <div className="min-h-screen bg-terminal-bg flex items-center justify-center">
+            <div className="text-terminal-green terminal-glow text-xl">Blog post not found</div>
+        </div>;
+    }
     
     return <div className="min-h-screen bg-terminal-bg">
         <Appbar />

@@ -23,8 +23,9 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
             const jwt = response.data.jwt;
             localStorage.setItem("token", jwt);
             navigate("/blogs");
-        } catch {
-            setError("Authentication failed. Check credentials.");
+        } catch (e: any) {
+            const errorMessage = e?.response?.data?.error || e?.response?.data?.message || "Authentication failed. Check credentials.";
+            setError(errorMessage);
         } finally {
             setLoading(false);
         }
