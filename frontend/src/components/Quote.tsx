@@ -7,13 +7,13 @@ export const Quote = () => {
                 </div>
                 <div className="mt-4 font-mono">
                     <div className="text-terminal-green mb-4">
-                        $ cat ./quote_of_the_day.txt
+                        $ cat ./quote_to_live.txt
                     </div>
                     <div className="text-terminal-green text-lg leading-relaxed mb-2">
                         "The only way to do great work is to love what you do. If you don't find what you love keep looking and don't settle. As with all matters of the heart, you'll know when you find it."
                     </div>
                     <div className="text-terminal-green text-lg mb-4">
-                        "stay hungry stay foolish"
+                        "Stay Hungry Stay Foolish"
                     </div>
                     <div className="text-terminal-green-dim text-sm">
                         &gt;&gt; AUTHOR: Steve Jobs
