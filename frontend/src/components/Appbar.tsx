@@ -67,7 +67,7 @@ export const Appbar = ({ mode = "READ" }: { mode?: string }) => {
                 >
                     [logout]
                 </button>
-                <Avatar size={"big"} name="User" />
+                <Avatar size={"big"} name="Hacker Singh" />
             </div>
         </div>
     </div>
