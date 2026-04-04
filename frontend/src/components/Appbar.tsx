@@ -36,10 +36,10 @@ export const Appbar = ({ mode = "READ" }: { mode?: string }) => {
                 </span>
             </Link>
             <div className="flex items-center gap-6 font-mono text-sm">
-                <span className="text-terminal-green-dim">
+                <span className="text-terminal-green-dark">
                     MEM_UTIL: [<span className="text-terminal-green">542K/640K</span>]
                 </span>
-                <span className="text-terminal-green-dim">
+                <span className="text-terminal-green-dark">
                     SYS_TIME: {formatTime(currentTime)}
                 </span>
             </div>
@@ -52,7 +52,7 @@ export const Appbar = ({ mode = "READ" }: { mode?: string }) => {
                 <span className="blink-cursor"></span>
             </div>
             <div className="flex items-center gap-4">
-                <span className="font-mono text-terminal-green-dim text-sm">
+                <span className="font-mono text-terminal-green-dark text-sm">
                     [MODE: {mode}]
                 </span>
                 <Link to={`/publish`}>
@@ -63,7 +63,7 @@ export const Appbar = ({ mode = "READ" }: { mode?: string }) => {
                 <button 
                     onClick={handleLogout}
                     type="button" 
-                    className="font-mono text-terminal-green-dim hover:text-terminal-green transition-colors text-sm"
+                    className="font-mono text-terminal-green-dark hover:text-terminal-green transition-colors text-sm"
                 >
                     [logout]
                 </button>
