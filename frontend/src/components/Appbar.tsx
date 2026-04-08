@@ -1,6 +1,9 @@
 import { Avatar } from "./BlogCard"
 import { Link, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
+import { tokenManager } from "../utils/auth"
+import axios from "axios"
+import { BACKEND_URL } from "../config"
 
 export const Appbar = ({ mode = "READ" }: { mode?: string }) => {
     const navigate = useNavigate();
@@ -22,9 +25,17 @@ export const Appbar = ({ mode = "READ" }: { mode?: string }) => {
         });
     };
 
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        navigate("/signin");
+    const handleLogout = async () => {
+        try {
+            await axios.post(`${BACKEND_URL}/api/v1/user/logout`, {}, {
+                withCredentials: true
+            });
+        } catch (error) {
+            console.error('Logout error:', error);
+        } finally {
+            tokenManager.removeToken();
+            navigate("/signin");
+        }
     };
 
     return <div className="bg-terminal-header-bg border-b border-terminal-border">
@@ -55,7 +66,7 @@ export const Appbar = ({ mode = "READ" }: { mode?: string }) => {
                 <span className="font-mono text-terminal-green-dark text-sm">
                     [MODE: {mode}]
                 </span>
-                {localStorage.getItem("token") ? (
+                {tokenManager.isAuthenticated() ? (
                     <>
                         <Link to={`/publish`}>
                             <button type="button" className="font-mono text-terminal-green border border-terminal-green px-3 py-1 hover:bg-terminal-green hover:text-terminal-bg transition-colors text-sm">

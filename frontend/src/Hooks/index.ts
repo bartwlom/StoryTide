@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import axios from "axios";
 import { BACKEND_URL } from "../config";
+import { tokenManager } from "../utils/auth";
 
 
 export interface Blog {
@@ -19,9 +20,7 @@ export const useBlog = ({ id }: { id: string }) => {
 
     useEffect(() => {
         axios.get(`${BACKEND_URL}/api/v1/blog/${id}`, {
-            headers: {
-                Authorization: localStorage.getItem("token") || ""
-            }
+            headers: tokenManager.getAuthHeader()
         })
             .then(response => {
                 setBlog(response.data.blog);
@@ -45,9 +44,7 @@ export const useBlogs = () => {
 
     useEffect(() => {
         axios.get(`${BACKEND_URL}/api/v1/blog/bulk`, {
-            headers: {
-                Authorization: localStorage.getItem("token") || ""
-            }
+            headers: tokenManager.getAuthHeader()
         })
             .then((response) => {
                 setBlogs(response.data.blogs || []);

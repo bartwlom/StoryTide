@@ -3,6 +3,7 @@ import { Appbar } from "../components/Appbar";
 import { BlogCard } from "../components/BlogCard";
 import { BlogSkeleton } from "../components/BlogSkeleton";
 import { useBlogs } from "../Hooks";
+import { tokenManager } from "../utils/auth";
 
 export const Blogs = () => {
     const navigate = useNavigate();
@@ -46,7 +47,7 @@ export const Blogs = () => {
                         </div>
                         <button 
                             onClick={() => {
-                                if (!localStorage.getItem("token")) {
+                                if (!tokenManager.isAuthenticated()) {
                                     navigate('/signin');
                                 } else {
                                     navigate('/publish');
@@ -81,7 +82,7 @@ export const Blogs = () => {
                                 </div>
                                 <button 
                                     onClick={() => {
-                                        if (!localStorage.getItem("token")) {
+                                        if (!tokenManager.isAuthenticated()) {
                                             navigate('/signin');
                                         } else {
                                             navigate('/publish');

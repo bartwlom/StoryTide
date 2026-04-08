@@ -3,6 +3,7 @@ import axios from "axios";
 import { BACKEND_URL } from "../config";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
+import { tokenManager } from "../utils/auth";
 
 export const Publish = () => {
     const [title, setTitle] = useState("");
@@ -13,7 +14,7 @@ export const Publish = () => {
     const [editorHeight, setEditorHeight] = useState(0);
 
     useEffect(() => {
-        if (!localStorage.getItem("token")) {
+        if (!tokenManager.isAuthenticated()) {
             navigate("/signin");
         }
     }, [navigate]);
@@ -91,9 +92,7 @@ export const Publish = () => {
                                         title,
                                         content: description
                                     }, {
-                                        headers: {
-                                            Authorization: localStorage.getItem("token")
-                                        }
+                                        headers: tokenManager.getAuthHeader()
                                     });
                                     navigate(`/blog/${response.data.id}`)
                                 } catch (e: unknown) {

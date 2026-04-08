@@ -10,9 +10,9 @@ const app = new Hono<{
   }
 }>()
 
-// Enhanced CORS configuration for production
+// Enhanced CORS configuration for production with cookie support
 app.use('*', cors({
-  origin: ['https://story-tide-frontend-fwnkj1ins-amitbartwal008-6084s-projects.vercel.app', 'https://story-tide-frontend.vercel.app', '*'],
+  origin: ['https://story-tide-frontend-fwnkj1ins-amitbartwal008-6084s-projects.vercel.app', 'https://story-tide-frontend.vercel.app', 'http://localhost:5173'],
   allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowHeaders: ['Content-Type', 'Authorization'],
   exposeHeaders: ['Content-Length', 'X-Requested-With'],

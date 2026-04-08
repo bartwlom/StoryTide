@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import type { signupInputType } from "@medium-blogging/common-app";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
+import { tokenManager } from "../utils/auth";
 
 export const Auth = ({ type }: { type: "signup" | "signin" }) => {
     const navigate = useNavigate();
@@ -21,7 +22,7 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
         try {
             const response = await axios.post(`${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`, postInputs);
             const jwt = response.data.jwt;
-            localStorage.setItem("token", jwt);
+            tokenManager.setToken(jwt);
             navigate("/blogs");
         } catch (e: unknown) {
             let errorMessage = "Authentication failed. Check credentials.";

@@ -17,16 +17,28 @@ export const blogRouter = new Hono<{
 
 
 blogRouter.use("/*", async (c, next) => {
+    // Try to get token from cookie first, then from authorization header
+    const cookieHeader = c.req.header("cookie") || "";
     const authHeader = c.req.header("authorization") || "";
     
     // Allow public access to blog reading endpoints
-    if ((c.req.path.includes("/bulk") || c.req.path.match(/^\/[0-9a-f-]+$/)) && c.req.method === "GET") {
+    if ((c.req.path.includes("/bulk") || c.req.path.match(/^[0-9a-f-]+$/)) && c.req.method === "GET") {
         await next();
         return;
     }
     
     try {
-        const token = authHeader.startsWith("Bearer ") ? authHeader.split(' ')[1] : authHeader;
+        let token = "";
+        
+        // Extract token from cookie
+        const cookieMatch = cookieHeader.match(/token=([^;]+)/);
+        if (cookieMatch) {
+            token = cookieMatch[1];
+        } else {
+            // Fallback to authorization header
+            token = authHeader.startsWith("Bearer ") ? authHeader.split(' ')[1] : authHeader;
+        }
+        
         const user = await verify(token, c.env.JWT_SECRET, 'HS256') as { id: string };
         if (user) {
             c.set("userId", user.id);

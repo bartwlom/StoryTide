@@ -50,7 +50,10 @@ userRouter.post('/signup', async (c) => {
       id: user.id
     }, c.env.JWT_SECRET);
 
-    return c.json({ jwt })
+    // Set HTTP-only cookie for secure authentication
+    c.header('Set-Cookie', `token=${jwt}; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=86400`);
+    
+    return c.json({ jwt, message: "User created successfully" })
   } catch (e) {
     console.log(e);
     c.status(403);
@@ -89,10 +92,19 @@ userRouter.post('/signin', async (c) => {
       c.env.JWT_SECRET
     )
 
-    return c.json({ jwt })
+    // Set HTTP-only cookie for secure authentication
+    c.header('Set-Cookie', `token=${jwt}; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=86400`);
+    
+    return c.json({ jwt, message: "Signed in successfully" })
   } catch (e) {
     console.log(e);
     c.status(500)
     return c.json({ error: "Internal server error" })
   }
+})
+
+userRouter.post('/logout', async (c) => {
+  // Clear the token cookie
+  c.header('Set-Cookie', 'token=; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=0');
+  return c.json({ message: "Logged out successfully" })
 })
