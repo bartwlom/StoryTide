@@ -44,6 +44,31 @@ export const Signin = () => {
             <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 items-start pt-8">
                 <div>
                     <Auth type={"signin"} />
+                    
+                    {/* Demo Credentials Box */}
+                    <div className="px-6 mt-4">
+                        <div className="terminal-box w-full max-w-md p-5 border border-terminal-green">
+                            <div className="font-mono">
+                                <div className="text-terminal-green text-sm font-bold mb-3 terminal-glow">
+                                    &gt;_ DEMO_CREDENTIALS
+                                </div>
+                                <div className="text-terminal-green-dim text-xs mb-2">
+                                    Use these credentials to explore the platform:
+                                </div>
+                                <div className="bg-terminal-card-bg/30 p-3 rounded border border-terminal-border">
+                                    <div className="text-terminal-green text-xs">
+                                        <span className="text-terminal-green-dark">Email:</span> demo@storytide.com
+                                    </div>
+                                    <div className="text-terminal-green text-xs mt-1">
+                                        <span className="text-terminal-green-dark">Password:</span> 123
+                                    </div>
+                                </div>
+                                <div className="text-terminal-green-dark text-xs mt-3">
+                                    &gt; Sign up to create your own blogs!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div className="hidden lg:block h-full">
                     <Quote />

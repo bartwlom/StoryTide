@@ -1,18 +1,10 @@
-import { useEffect } from "react";
 import { Appbar } from "../components/Appbar";
 import { FullBlog } from "../components/FullBlog";
 import { Spinner } from "../components/Spinner";
 import { useBlog } from "../Hooks"
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export const Blog = () => {
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (!localStorage.getItem("token")) {
-            navigate("/signin");
-        }
-    }, [navigate]);
     const { id } = useParams();
     const { loading, blog } = useBlog({
         id: id || ""

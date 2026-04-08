@@ -55,19 +55,36 @@ export const Appbar = ({ mode = "READ" }: { mode?: string }) => {
                 <span className="font-mono text-terminal-green-dark text-sm">
                     [MODE: {mode}]
                 </span>
-                <Link to={`/publish`}>
-                    <button type="button" className="font-mono text-terminal-green border border-terminal-green px-3 py-1 hover:bg-terminal-green hover:text-terminal-bg transition-colors text-sm">
-                        $ ./publish_new.sh
-                    </button>
-                </Link>
-                <button 
-                    onClick={handleLogout}
-                    type="button" 
-                    className="font-mono text-terminal-green-dark hover:text-terminal-green transition-colors text-sm"
-                >
-                    [logout]
-                </button>
-                <Avatar size={"big"} name="Hacker Singh" />
+                {localStorage.getItem("token") ? (
+                    <>
+                        <Link to={`/publish`}>
+                            <button type="button" className="font-mono text-terminal-green border border-terminal-green px-3 py-1 hover:bg-terminal-green hover:text-terminal-bg transition-colors text-sm">
+                                $ ./publish_new.sh
+                            </button>
+                        </Link>
+                        <button 
+                            onClick={handleLogout}
+                            type="button" 
+                            className="font-mono text-terminal-green-dark hover:text-terminal-green transition-colors text-sm"
+                        >
+                            [logout]
+                        </button>
+                        <Avatar size={"big"} name="Hacker Singh" />
+                    </>
+                ) : (
+                    <>
+                        <Link to="/signin">
+                            <button type="button" className="font-mono text-terminal-green border border-terminal-green px-3 py-1 hover:bg-terminal-green hover:text-terminal-bg transition-colors text-sm">
+                                $ ./login.sh
+                            </button>
+                        </Link>
+                        <Link to="/signup">
+                            <button type="button" className="font-mono text-terminal-green-dark hover:text-terminal-green transition-colors text-sm">
+                                [signup]
+                            </button>
+                        </Link>
+                    </>
+                )}
             </div>
         </div>
     </div>

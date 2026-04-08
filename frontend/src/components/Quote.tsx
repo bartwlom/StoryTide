@@ -7,16 +7,22 @@ export const Quote = () => {
                 </div>
                 <div className="mt-4 font-mono">
                     <div className="text-terminal-green mb-4">
-                        $ cat ./quote_to_live.txt
+                        $ cat ./about_storytide.txt
                     </div>
-                    <div className="text-terminal-green text-lg leading-relaxed mb-2">
-                        "The only way to do great work is to love what you do. If you don't find what you love keep looking and don't settle. As with all matters of the heart, you'll know when you find it."
+                    <div className="text-terminal-green text-base leading-relaxed mb-3">
+                        "StoryTide is a modern blogging platform that combines the nostalgia of terminal interfaces with modern web capabilities."
                     </div>
-                    <div className="text-terminal-green text-lg mb-4">
-                        "Stay Hungry Stay Foolish"
+                    <div className="text-terminal-green-dim text-sm mb-4">
+                        Built with React, TypeScript, Cloudflare Workers, and PostgreSQL.
                     </div>
-                    <div className="text-terminal-green-dim text-sm">
-                        &gt;&gt; AUTHOR: Steve Jobs
+                    <div className="text-terminal-green text-sm mb-2">
+                        &gt;_ WHY_WE_BUILD_IT:
+                    </div>
+                    <div className="text-terminal-green-dim text-xs leading-relaxed">
+                        To create a flowing current of stories, ideas, and knowledge that connects writers and readers across the digital landscape. Whether you're a developer documenting your journey or a writer exploring new ideas, StoryTide provides the perfect canvas.
+                    </div>
+                    <div className="text-terminal-green-dark text-xs mt-4">
+                        &gt;&gt; STATUS: READY_FOR_YOUR_STORIES
                     </div>
                 </div>
             </div>

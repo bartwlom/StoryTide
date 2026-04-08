@@ -45,7 +45,13 @@ export const Blogs = () => {
                             No system logs discovered in this partition.
                         </div>
                         <button 
-                            onClick={() => navigate('/publish')}
+                            onClick={() => {
+                                if (!localStorage.getItem("token")) {
+                                    navigate('/signin');
+                                } else {
+                                    navigate('/publish');
+                                }
+                            }}
                             className="inline-flex items-center gap-2 px-4 py-2 border border-terminal-green text-terminal-green hover:bg-terminal-green hover:text-terminal-bg font-mono text-sm transition-all duration-200 group"
                         >
                             <span className="text-terminal-green group-hover:text-terminal-bg">$</span>
@@ -74,7 +80,13 @@ export const Blogs = () => {
                                     Share your story with the world. Start writing your first blog post now.
                                 </div>
                                 <button 
-                                    onClick={() => navigate('/publish')}
+                                    onClick={() => {
+                                        if (!localStorage.getItem("token")) {
+                                            navigate('/signin');
+                                        } else {
+                                            navigate('/publish');
+                                        }
+                                    }}
                                     className="inline-flex items-center gap-2 px-6 py-3 bg-terminal-green text-terminal-bg border border-terminal-green hover:bg-terminal-green-dark font-mono text-base transition-all duration-200 group shadow-lg"
                                 >
                                     <span className="font-bold">$ ./create_your_blog.sh</span>
