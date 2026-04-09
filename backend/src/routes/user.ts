@@ -55,7 +55,6 @@ userRouter.post('/signup', async (c) => {
     
     return c.json({ jwt, message: "User created successfully" })
   } catch (e) {
-    console.log(e);
     c.status(403);
     return c.json({ error: 'User already exists or invalid input' })
   }
@@ -97,7 +96,6 @@ userRouter.post('/signin', async (c) => {
     
     return c.json({ jwt, message: "Signed in successfully" })
   } catch (e) {
-    console.log(e);
     c.status(500)
     return c.json({ error: "Internal server error" })
   }

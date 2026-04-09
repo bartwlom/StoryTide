@@ -12,7 +12,24 @@ const app = new Hono<{
 
 // Enhanced CORS configuration for production with cookie support
 app.use('*', cors({
-  origin: ['https://story-tide-frontend-fwnkj1ins-amitbartwal008-6084s-projects.vercel.app', 'https://story-tide-frontend.vercel.app', 'http://localhost:5173'],
+  origin: (origin, c) => {
+    // Allow requests from known origins or localhost for development
+    const allowedOrigins = [
+      'https://story-tide-frontend.vercel.app',
+      'https://story-tide-frontend-fwnkj1ins-amitbartwal008-6084s-projects.vercel.app',
+      'http://localhost:5173',
+      'http://localhost:3000'
+    ];
+    
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return '*';
+    
+    if (allowedOrigins.includes(origin)) {
+      return origin;
+    }
+    
+    return null;
+  },
   allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowHeaders: ['Content-Type', 'Authorization'],
   exposeHeaders: ['Content-Length', 'X-Requested-With'],
@@ -27,4 +44,4 @@ app.get('/', (c) => {
   return c.text('StoryTide API is running!')
 })
 
-export default app
+export default app;

@@ -17,7 +17,7 @@ async function main() {
     create: {
       email: 'demo@storytide.com',
       name: 'System Admin',
-      password: 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', // SHA256 hash of '123'
+      password: 'd3ad9315b7be5dd53b31a273b3b3aba5defe700808305aa16a3062b76658a791', // SHA256 hash of 'demo123'
     },
   })
 

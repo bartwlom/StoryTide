@@ -64,7 +64,7 @@ blogRouter.post('/', async (c) => {
     const body = await c.req.json();
     const { success } = createPostInput.safeParse(body);
     if (!success) {
-        c.status(403);
+        c.status(400);
         return c.json({
             message: "Inputs not correct"
         })
@@ -91,14 +91,28 @@ blogRouter.put('/', async (c) => {
     const body = await c.req.json();
     const { success } = updatePostInput.safeParse(body);
     if (!success) {
-        c.status(403);
+        c.status(400);
         return c.json({
             message: "Inputs not correct"
         })
     }
+    
+    const authorId = c.get("userId");
     const prisma = new PrismaClient({
         accelerateUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())
+
+    // Verify the blog belongs to the current user
+    const existingBlog = await prisma.post.findUnique({
+        where: { id: body.id }
+    });
+
+    if (!existingBlog || existingBlog.authorId !== authorId) {
+        c.status(403);
+        return c.json({
+            message: "Unauthorized: You can only edit your own blogs"
+        });
+    }
 
     const blog = await prisma.post.update({
         where: {
@@ -115,27 +129,46 @@ blogRouter.put('/', async (c) => {
     })
 })
 
-// Todo: add pagination
+// Added pagination support
 blogRouter.get('/bulk', async (c) => {
+    const page = parseInt(c.req.query('page') || '1');
+    const limit = parseInt(c.req.query('limit') || '10');
+    const offset = (page - 1) * limit;
+    
     const prisma = new PrismaClient({
         accelerateUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())
-    const blogs = await prisma.post.findMany({
-        select: {
-            content: true,
-            title: true,
-            id: true,
-            createdAt: true,
-            author: {
-                select: {
-                    name: true
+    
+    const [blogs, totalCount] = await Promise.all([
+        prisma.post.findMany({
+            select: {
+                content: true,
+                title: true,
+                id: true,
+                createdAt: true,
+                author: {
+                    select: {
+                        name: true
+                    }
                 }
+            },
+            skip: offset,
+            take: limit,
+            orderBy: {
+                createdAt: 'desc'
             }
-        }
-    });
+        }),
+        prisma.post.count()
+    ]);
 
     return c.json({
-        blogs
+        blogs,
+        pagination: {
+            page,
+            limit,
+            total: totalCount,
+            totalPages: Math.ceil(totalCount / limit)
+        }
     })
 })
 
@@ -146,7 +179,7 @@ blogRouter.get('/:id', async (c) => {
     }).$extends(withAccelerate())
 
     try {
-        const blog = await prisma.post.findFirst({
+        const blog = await prisma.post.findUnique({
             where: {
                 id: id
             },
@@ -162,6 +195,13 @@ blogRouter.get('/:id', async (c) => {
                 }
             }
         })
+
+        if (!blog) {
+            c.status(404);
+            return c.json({
+                message: "Blog post not found"
+            });
+        }
 
         return c.json({
             blog

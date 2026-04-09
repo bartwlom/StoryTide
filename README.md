@@ -132,7 +132,7 @@ npm run dev
 
 After seeding, use these credentials to explore the platform:
 - **Email**: demo@storytide.com
-- **Password**: 123
+- **Password**: demo123
 
 ## 🚀 Deployment
 
