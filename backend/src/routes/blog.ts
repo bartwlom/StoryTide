@@ -21,8 +21,11 @@ blogRouter.use("/*", async (c, next) => {
     const cookieHeader = c.req.header("cookie") || "";
     const authHeader = c.req.header("authorization") || "";
     
-    // Allow public access to blog reading endpoints
-    if ((c.req.path.includes("/bulk") || c.req.path.match(/^[0-9a-f-]+$/)) && c.req.method === "GET") {
+    // Allow public access to blog reading endpoints (GET /bulk and GET /:id)
+    const isBulkRead = c.req.path.includes("/bulk") && c.req.method === "GET";
+    const isSingleBlogRead = /^\/[\w-]+$/.test(c.req.path.replace('/api/v1/blog', '')) && c.req.method === "GET";
+    
+    if (isBulkRead || isSingleBlogRead) {
         await next();
         return;
     }
