@@ -2,14 +2,14 @@
 
 /* Terminal Theme - CSS Custom Properties */
 :root {
-  --terminal-bg: #111111;
-  --terminal-green: #00ff41;
-  --terminal-green-dim: #00cc33;
-  --terminal-green-dark: #003300;
-  --terminal-green-header: #0b3d0b;
-  --terminal-border: #00ff41;
-  --terminal-input-bg: #0d1a0d;
-  --terminal-card-bg: #0f0f0f;
+  --terminal-bg: #0a0a0a;
+  --terminal-green: #4ade80;
+  --terminal-green-dim: #22c55e;
+  --terminal-green-dark: #166534;
+  --terminal-green-header: #14532d;
+  --terminal-border: #22c55e;
+  --terminal-input-bg: #0f1a0f;
+  --terminal-card-bg: #0d0d0d;
   --terminal-header-bg: #050505;
 }
 
@@ -25,21 +25,21 @@ html, body {
 
 /* Tailwind v4 Theme Configuration */
 @theme {
-  --color-terminal-bg: #111111;
-  --color-terminal-green: #00ff41;
-  --color-terminal-green-dim: #00cc33;
-  --color-terminal-green-dark: #003300;
-  --color-terminal-green-header: #0b3d0b;
-  --color-terminal-border: #0b3d0b;
-  --color-terminal-input-bg: #0d1a0d;
-  --color-terminal-card-bg: #0f0f0f;
+  --color-terminal-bg: #0a0a0a;
+  --color-terminal-green: #4ade80;
+  --color-terminal-green-dim: #22c55e;
+  --color-terminal-green-dark: #166534;
+  --color-terminal-green-header: #14532d;
+  --color-terminal-border: #22c55e;
+  --color-terminal-input-bg: #0f1a0f;
+  --color-terminal-card-bg: #0d0d0d;
   --color-terminal-header-bg: #050505;
   --font-family-mono: 'Share Tech Mono', 'Fira Code', 'Courier New', monospace;
 }
 
 /* Custom Utility Classes */
 .terminal-glow {
-  text-shadow: 0 0 5px var(--terminal-green), 0 0 10px var(--terminal-green-dim);
+  text-shadow: 0 0 3px rgba(74, 222, 128, 0.4), 0 0 6px rgba(74, 222, 128, 0.2);
 }
 
 .terminal-box {
@@ -80,8 +80,8 @@ html, body {
     0deg,
     transparent,
     transparent 2px,
-    rgba(0, 255, 65, 0.02) 2px,
-    rgba(0, 255, 65, 0.02) 4px
+    rgba(74, 222, 128, 0.03) 2px,
+    rgba(74, 222, 128, 0.03) 4px
   );
   pointer-events: none;
   z-index: 1;
