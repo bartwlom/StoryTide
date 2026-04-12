@@ -2,19 +2,20 @@
 
 /* Terminal Theme - CSS Custom Properties */
 :root {
-  --terminal-bg: #0a0a0a;
-  --terminal-green: #4ade80;
-  --terminal-green-dim: #22c55e;
-  --terminal-green-dark: #166534;
-  --terminal-green-header: #14532d;
-  --terminal-border: #22c55e;
-  --terminal-input-bg: #0f1a0f;
-  --terminal-card-bg: #0d0d0d;
+  --terminal-bg: #111111;
+  --terminal-green: #00ff41;
+  --terminal-green-dim: #00cc33;
+  --terminal-green-dark: #003300;
+  --terminal-green-header: #0b3d0b;
+  --terminal-border: #00ff41;
+  --terminal-input-bg: #0d1a0d;
+  --terminal-card-bg: #0f0f0f;
   --terminal-header-bg: #050505;
 }
 
 /* Global Body Styles */
-html, body {
+html,
+body {
   background-color: var(--terminal-bg);
   color: var(--terminal-green);
   font-family: 'Share Tech Mono', 'Fira Code', 'Courier New', monospace;
@@ -25,21 +26,21 @@ html, body {
 
 /* Tailwind v4 Theme Configuration */
 @theme {
-  --color-terminal-bg: #0a0a0a;
-  --color-terminal-green: #4ade80;
-  --color-terminal-green-dim: #22c55e;
-  --color-terminal-green-dark: #166534;
-  --color-terminal-green-header: #14532d;
-  --color-terminal-border: #22c55e;
-  --color-terminal-input-bg: #0f1a0f;
-  --color-terminal-card-bg: #0d0d0d;
+  --color-terminal-bg: #111111;
+  --color-terminal-green: #00ff41;
+  --color-terminal-green-dim: #00cc33;
+  --color-terminal-green-dark: #003300;
+  --color-terminal-green-header: #0b3d0b;
+  --color-terminal-border: #0b3d0b;
+  --color-terminal-input-bg: #0d1a0d;
+  --color-terminal-card-bg: #0f0f0f;
   --color-terminal-header-bg: #050505;
   --font-family-mono: 'Share Tech Mono', 'Fira Code', 'Courier New', monospace;
 }
 
 /* Custom Utility Classes */
 .terminal-glow {
-  text-shadow: 0 0 3px rgba(74, 222, 128, 0.4), 0 0 6px rgba(74, 222, 128, 0.2);
+  text-shadow: 0 0 5px var(--terminal-green), 0 0 10px var(--terminal-green-dim);
 }
 
 .terminal-box {
@@ -76,21 +77,27 @@ html, body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(74, 222, 128, 0.03) 2px,
-    rgba(74, 222, 128, 0.03) 4px
-  );
+  background: repeating-linear-gradient(0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 255, 65, 0.02) 2px,
+      rgba(0, 255, 65, 0.02) 4px);
   pointer-events: none;
   z-index: 1;
 }
 
 /* Blinking Cursor Animation */
 @keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
+
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
 }
 
 .blink-cursor::after {
@@ -125,14 +132,16 @@ html, body {
 }
 
 /* Input and Textarea Defaults */
-input, textarea {
+input,
+textarea {
   background-color: var(--terminal-input-bg);
   color: var(--terminal-green);
   caret-color: var(--terminal-green);
   font-family: inherit;
 }
 
-input::placeholder, textarea::placeholder {
+input::placeholder,
+textarea::placeholder {
   color: var(--terminal-green-dark);
 }
 
