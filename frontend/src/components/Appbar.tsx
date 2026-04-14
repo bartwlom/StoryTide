@@ -42,7 +42,7 @@ export const Appbar = ({ mode = "READ" }: { mode?: string }) => {
         {/* Top header row */}
         <div className="flex justify-between px-6 py-3">
             <Link to={'/blogs'} className="flex flex-row items-center gap-3 cursor-pointer">
-                <img src="/logo.png" alt="Logo" className="w-8 h-8 object-contain" />
+                <img src="/storytide logo.svg" alt="StoryTide Logo" className="w-8 h-8 object-contain" />
                 <span className="font-mono text-xl font-bold text-terminal-green terminal-glow tracking-wider">
                     STORYTIDE
                 </span>

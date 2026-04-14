@@ -26,7 +26,7 @@ export const Signup = () => {
             <div className="border-b border-terminal-green px-6 py-3">
                 <div className="flex justify-between items-center font-mono text-sm">
                     <div className="flex flex-row justify-center items-center gap-3">
-                        <img src="/logo.png" alt="Logo" className="w-8 h-8 object-contain" />
+                        <img src="/storytide logo.svg" alt="StoryTide Logo" className="w-8 h-8 object-contain" />
                         <span className="font-mono text-xl font-bold text-terminal-green terminal-glow tracking-wider">
                             STORYTIDE
                         </span>
